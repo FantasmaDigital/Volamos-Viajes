@@ -10,9 +10,19 @@ interface CardProps {
 const CardTopDestionation: React.FC<CardProps> = ({ destination, isSelected = false }) => {
     const [newImage, setNewImage] = useState<string>(destination.images[2])
 
+    const cleanDestinationName = (name: string) => {
+        // Convertir a minúsculas, reemplazar espacios por guiones y eliminar tildes y caracteres especiales
+        return name
+          .toLowerCase() // Convertir a minúsculas
+          .normalize("NFD") // Descomponer los caracteres acentuados
+          .replace(/[\u0300-\u036f]/g, "") // Eliminar los caracteres de acentuación
+          .replace(/[^a-z0-9\s\-]/g, "") // Eliminar caracteres especiales, solo dejamos letras, números, espacios y guiones
+          .split(' ')[0]; // Tomar solo el primer término (antes del primer espacio)
+    };
+
     return (
         <div className="w-full flex flex-col h-full shadow-2xl p-3 rounded-lg">
-            <Link to={`./view/${destination.name.toLocaleLowerCase().split(' ')[0]}`} state={{destination}}>
+            <Link to={`./view/${cleanDestinationName(destination.name)}`} state={{destination}}>
             {
                 isSelected ? (
                     <img src={newImage} alt={destination.name}

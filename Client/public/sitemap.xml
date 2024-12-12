@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Páginas Estáticas -->
+  <url>
+    <loc>https://volamosviajes.com/</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>1.0</priority> <!-- Página de inicio -->
+  </url>
+  <url>
+    <loc>https://volamosviajes.com/signin</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.8</priority> <!-- Iniciar sesión -->
+  </url>
+  <url>
+    <loc>https://volamosviajes.com/signup</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.8</priority> <!-- Registro de usuario -->
+  </url>
+
+  <!-- Páginas Dinámicas -->
+  <url>
+    <loc>https://volamosviajes.com/view/panama</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.6</priority> <!-- Página de Panamá -->
+  </url>
+  <url>
+    <loc>https://volamosviajes.com/view/bocas</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.6</priority> <!-- Página de Bocas -->
+  </url>
+  <url>
+    <loc>https://volamosviajes.com/view/disneyland</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.6</priority> <!-- Página de Disneyland -->
+  </url>
+  <url>
+    <loc>https://volamosviajes.com/view/osaka</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.6</priority> <!-- Página de Osaka -->
+  </url>
+  <url>
+    <loc>https://volamosviajes.com/view/estambul</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.6</priority> <!-- Página de Estambul -->
+  </url>
+
+</urlset>
