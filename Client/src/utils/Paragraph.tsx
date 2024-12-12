@@ -11,7 +11,7 @@ interface PropsParagraph {
 const Paragraph: React.FC<PropsParagraph> = ({ paragraph, showIndex = false, indexItem, styles = '' }) => {
     return (
         <div className="w-full">
-            <p className={`py-1 text-sm sm:text-base md:text-lg lg:text-xl ${styles}`}>
+            <p className={`py-1 text-sm sm:text-base md:text-lg ${styles}`}>
                 <span>
                     {showIndex && <strong className="pr-1 font-semibold">{indexItem}.</strong>}
                     {renderSentence(paragraph)}

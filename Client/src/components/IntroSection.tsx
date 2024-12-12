@@ -52,7 +52,7 @@ const IntroSection: React.FC = () => {
 
   return (
     <>
-      <div id='rentacar' className="pt-20 pb-10 w-[90%] sm:w-[80%] md:w-[90%] m-auto rounded-lg flex flex-col lg:flex-row items-center md:items-start text-center md:text-left h-min">
+      <div id='rentacar' className="pt-20 pb-10 w-[90%] sm:w-[80%] md:w-[85%] m-auto rounded-lg flex flex-col lg:flex-row items-center md:items-start text-center md:text-left h-min">
         <div className='w-full flex flex-col-reverse'>
           <div className="md:w-full mb-10 lg:mb-0 mt-6 md:mt-0 flex justify-end items-end h-full">
             <img

@@ -35,7 +35,7 @@ const EasySteps: React.FC = () => {
   return (
     <>
       <hr className='w-[85%] m-auto border' />
-      <div className="w-[90%] sm:w-[80%] md:w-[85%] m-auto overflow-hidden">
+      <div className="w-[90%] sm:w-[80%] md:w-[80%] m-auto overflow-hidden">
         <section className="flex flex-col lg:flex-row items-center justify-between gap-4 py-14">
           <div className="flex flex-col w-auto">
             <MainTitles topText='Fácil y Rápido' bottomText='Reserva tu próximo viaje en 5 sencillos pasos'/>
