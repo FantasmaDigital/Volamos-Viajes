@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     <div className="w-full min-h-screen flex flex-col items-center bg-white overflow-hidden">
       <Helmet>
         {/* Meta etiquetas generales */}
-        <title>Volamos Viajes | Reserva Fácil y Rápida para tus Próximas Vacaciones</title>
+        <title>Volamos Viajes | Reserva Fácil y Rápido para tus Próximas Vacaciones</title>
         <meta name="description" content="Explora nuestras ofertas exclusivas de paquetes de viaje, destinos populares y promociones increíbles. Planea tus vacaciones soñadas con Volamos Viajes." />
         <meta name="keywords" content="viajes, vacaciones, destinos, ofertas exclusivas, paquetes de viaje, reservas fáciles, turismo, promociones de viajes, mejores ofertas" />
         <meta name="author" content="Volamos Viajes" />
