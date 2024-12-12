@@ -1,6 +1,6 @@
 // Footer.tsx
 import React from 'react';
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 import HeroLogo from './HeroLogo';
 import { scrollToTop } from '../utils/functions/topScroll';
 import { WA_URI } from '../constants/URIS';
@@ -77,9 +77,10 @@ const Footer: React.FC<{isMain?:boolean}> = ({isMain=true}) => {
 
                 {/* Iconos sociales */}
                 <div className="flex justify-center md:justify-start space-x-6 mt-6 md:mt-0">
-                    <a href="#" className="text-accentBackground hover:text-secondary"><FaFacebookF /></a>
-                    <a href="#" className="text-accentBackground hover:text-secondary"><FaInstagram /></a>
-                    <a href="#" className="text-accentBackground hover:text-secondary"><FaTwitter /></a>
+                    <a href="https://www.facebook.com/Volamosviajes/" target="_blank" className="text-accentBackground hover:text-secondary"><FaFacebookF /></a>
+                    <a href="https://www.instagram.com/volamosviajes/?hl=es-la" target="_blank" className="text-accentBackground hover:text-secondary"><FaInstagram /></a>
+                    <a href="https://www.tiktok.com/@volamosviajes" target="_blank" className="text-accentBackground hover:text-secondary"><FaTiktok /></a>
+                    {/* <a href="#" target="_blank" className="text-accentBackground hover:text-secondary"><FaTwitter /></a> */}
                 </div>
             </div>
 
