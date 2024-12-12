@@ -1,0 +1,13 @@
+# Permitir el acceso a todos los motores de búsqueda
+User-agent: *
+Allow: /
+
+# Bloquear acceso a rutas sensibles o irrelevantes para SEO
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /api/
+Disallow: /user/
+
+# Declarar el enlace al sitemap
+Sitemap: https://volamosviajes.com/sitemap.xml

@@ -17,6 +17,7 @@ import { scrollToTop } from "../../utils/functions/topScroll";
 import WhatsAppBtn from "../../components/WhatsAppBtn";
 import PromotionPackage from "../../components/PromotionPackage";
 import PromoPopUp from "../../utils/PromoPopUp";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -132,6 +133,7 @@ const Home: React.FC = () => {
       </animated.div>
 
       <WhatsAppBtn />
+      <SpeedInsights />
       <ScrollToTop />
     </div>
   );
