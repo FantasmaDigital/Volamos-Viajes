@@ -8,6 +8,7 @@ import { sanitizeInput } from "../utils/functions/sanitizeInput";
 import Cookies from 'js-cookie';
 import { Alert } from "@mui/material";
 import GoogleBTN from "./GoogleBTN";
+import { Helmet } from "react-helmet";
 
 const HeaderLogo = React.lazy(() => import("./HeroLogo")); // Si deseas que el logo también se cargue de forma diferida//-
 
@@ -39,15 +40,15 @@ const SignIn: React.FC = () => {
             secure: true,
             sameSite: 'Strict',
           });
-  
+
           // También guardamos el objeto del usuario en el localStorage
           localStorage.setItem('user', JSON.stringify(data.user));
-  
+
           // Mostrar mensajes de éxito
           setShowSeverity("success");
           setShowMessage("Credenciales válidas.");
           setStateMessage(true);
-  
+
           setTimeout(() => {
             setStateMessage(false);
             navigateTo('/');  // Redirigir al inicio o a la página deseada
@@ -69,7 +70,7 @@ const SignIn: React.FC = () => {
             setShowMessage("Ocurrió un error al iniciar sesión.");
           }
           setStateMessage(true);
-  
+
           setTimeout(() => {
             setStateMessage(false);
           }, 5000);
@@ -80,19 +81,75 @@ const SignIn: React.FC = () => {
         setShowSeverity("error");
         setShowMessage("Ocurrió un error al intentar comunicarte con el servidor.");
         setStateMessage(true);
-  
+
         setTimeout(() => {
           setStateMessage(false);
         }, 5000);
       });
   };
-   
+
 
   const { ref: formRef } = useScrollAnimation(100);
   const { ref: googleRef, springProps: googleSpring } = useScrollAnimation(200);
 
   return (
     <div className="flex min-h-screen py-14 md:py-0">
+      <Helmet>
+        {/* Meta etiquetas generales */}
+        <title>Iniciar Sesión | Volamos Viajes - Accede a tu cuenta</title>
+        <meta
+          name="description"
+          content="Inicia sesión en Volamos Viajes para explorar nuestras ofertas exclusivas, paquetes de viaje y destinos increíbles. ¡Reserva tus vacaciones ahora!"
+        />
+        <meta
+          name="keywords"
+          content="iniciar sesión, cuenta, usuario, acceso, viajes, vacaciones, paquetes, ofertas, Volamos Viajes"
+        />
+        <meta name="author" content="Volamos Viajes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Meta etiquetas Open Graph para redes sociales */}
+        <meta property="og:title" content="Iniciar Sesión | Volamos Viajes - Accede a tu cuenta" />
+        <meta
+          property="og:description"
+          content="Inicia sesión en Volamos Viajes para explorar nuestras ofertas exclusivas, paquetes de viaje y destinos increíbles. ¡Reserva tus vacaciones ahora!"
+        />
+        <meta property="og:image" content="https://volamosviajes.com/img/logo.png" />
+        <meta property="og:image:alt" content="Iniciar sesión en Volamos Viajes" />
+        <meta property="og:url" content="https://volamosviajes.com/signin" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="es_ES" />
+
+        {/* Meta etiquetas para Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Iniciar Sesión | Volamos Viajes - Accede a tu cuenta" />
+        <meta
+          name="twitter:description"
+          content="Inicia sesión en Volamos Viajes para explorar nuestras ofertas exclusivas, paquetes de viaje y destinos increíbles. ¡Reserva tus vacaciones ahora!"
+        />
+        <meta name="twitter:image" content="https://volamosviajes.com/img/logo.png" />
+        <meta name="twitter:image:alt" content="Iniciar sesión en Volamos Viajes" />
+        <meta name="twitter:site" content="@VolamosViajes" />
+        <meta name="twitter:creator" content="@VolamosViajes" />
+
+        {/* Meta etiquetas adicionales */}
+        <link rel="canonical" href="https://volamosviajes.com/signin" />
+        <meta property="og:site_name" content="Volamos Viajes" />
+        <meta name="theme-color" content="#0e3d5e" />
+        <meta name="apple-mobile-web-app-title" content="Volamos Viajes" />
+        <meta name="application-name" content="Volamos Viajes" />
+        <meta name="msapplication-TileColor" content="#1f567a" />
+        <meta name="msapplication-TileImage" content="https://volamosviajes.com/img/logo.png" />
+
+        {/* Favicon y recursos */}
+        <link rel="icon" href="https://volamosviajes.com/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" sizes="180x180" href="https://volamosviajes.com/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="https://volamosviajes.com/img/favicon-32x32.png" />
+        <link rel="manifest" href="https://volamosviajes.com/site.webmanifest" />
+      </Helmet>
+
       {/* Sección de la imagen */}
       <div
         className="hidden lg:flex w-[55%] bg-cover bg-center relative"
@@ -185,12 +242,12 @@ const SignIn: React.FC = () => {
             </button>
 
             {/* Separador */}
-            <Separator/>
+            <Separator />
 
             {/* Botón de inicio de sesión con Google */}
             <Suspense fallback={<div>Loading...</div>}>
               <animated.div style={googleSpring} ref={googleRef}>
-                <GoogleBTN text="signin_with"/>
+                <GoogleBTN text="signin_with" />
               </animated.div>
             </Suspense>
           </div>
