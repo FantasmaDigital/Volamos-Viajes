@@ -8,7 +8,7 @@ const WhatsAppBtn: React.FC = () => {
         number: "+50370200976",
         company: "Volamos Viajes", // Agregamos el nombre de la empresa
         message: "¿Tienes preguntas sobre nuestros destinos? 🤔🌍 \n¡Estamos aquí para ayudarte! 💬🙂",
-        avatar: `${FRONT_URI}/favicon.ico`
+        avatar: `${/favicon.ico`
     };
 
     return (
