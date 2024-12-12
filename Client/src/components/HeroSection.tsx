@@ -91,7 +91,6 @@ const HeroSection: React.FC = () => {
               className="w-full px-4 py-2 rounded-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-none transition duration-300"
               placeholder="Correo electronico"
               required
-              autoFocus // Enfocar el campo de correo electrónico al cargar
             />
             <input
               id="destination"
