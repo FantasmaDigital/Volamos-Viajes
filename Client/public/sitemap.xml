@@ -4,7 +4,6 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
-  <!-- Páginas Estáticas -->
   <url>
     <loc>https://volamosviajes.com/</loc>
     <lastmod>2024-12-12T17:34:46+00:00</lastmod>
@@ -21,7 +20,6 @@
     <priority>0.8</priority> <!-- Registro de usuario -->
   </url>
 
-  <!-- Páginas Dinámicas -->
   <url>
     <loc>https://volamosviajes.com/view/panama</loc>
     <lastmod>2024-12-12T17:34:46+00:00</lastmod>
