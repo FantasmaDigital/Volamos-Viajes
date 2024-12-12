@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",  // Ruta para almacenar información de la compilación incremental.
+    "target": "ES2020",  // Compilar a JavaScript de ES2020. Esto es compatible con la mayoría de los navegadores actuales.
+    "useDefineForClassFields": true,  // Usar la nueva definición de campos de clase en ES2022, que evita errores con campos de clase.
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],  // Especifica las bibliotecas globales disponibles para tu código.
+    "module": "ESNext",  // Usar el sistema de módulos de ESNext.
+    "skipLibCheck": true,  // Omite la verificación de tipos en los archivos de las bibliotecas.
+    
+    /* Bundler mode */
+    "moduleResolution": "Bundler",  // Utiliza el modo "Bundler" para resolver módulos, que es común en herramientas como Vite.
+    "allowImportingTsExtensions": true,  // Permite importar archivos `.ts` o `.tsx` sin necesidad de escribir la extensión.
+    "isolatedModules": true,  // Asegura que cada archivo se pueda procesar de manera aislada.
+    "moduleDetection": "force",  // Forzar la detección del tipo de módulo.
+    "noEmit": true,  // No generar archivos de salida (esto es común cuando solo se usan los tipos y no se genera código JavaScript).
+    "jsx": "react-jsx",  // Usar el nuevo modo JSX de React (React 17+).
+    
+    /* Linting */
+    "strict": true,  // Activar todas las comprobaciones estrictas de TypeScript.
+    "noUnusedLocals": true,  // Marcar variables no usadas como errores.
+    "noUnusedParameters": true,  // Marcar parámetros no usados como errores.
+    "noFallthroughCasesInSwitch": true,  // Prevenir caídas de caso en declaraciones `switch`.
+    "noUncheckedSideEffectImports": true  // Deshabilitar la importación de módulos con efectos secundarios no controlados.
+  },
+  "include": ["src"]  // Incluir todos los archivos dentro de la carpeta `src` para ser procesados.
+}

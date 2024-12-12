@@ -1,0 +1,243 @@
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+  align-items: start;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  padding-top: 8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.textContent {
+  max-width: 70%;
+}
+
+.tagline {
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.findOutMoreButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.findOutMoreButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 111, 97, 0.3);
+}
+
+.playDemoButton {
+  background-color: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.playDemoButton:hover {
+  transform: scale(1.05);
+}
+
+.playIcon {
+  margin-right: 0.5rem;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.planeIcon {
+  position: absolute;
+  top: 20px;
+  right: -50px;
+  width: 100px;
+  animation: fly 5s linear infinite;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-200px);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .heroContainer {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    padding-top: 7rem;
+    width: 80%;
+  }
+
+  .textContent {
+    max-width: 70%;
+    padding: 0;
+  }
+
+  .tagline {
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .findOutMoreButton,
+  .playDemoButton {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .heroImage {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .planeIcon {
+    width: 70px;
+    right: -30px;
+    top: 15px;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .heroContainer {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    padding-top: 8rem;
+    width: 90%;
+  }
+
+  .textContent {
+    max-width: 70%;
+    padding: 0;
+  }
+
+  .tagline {
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .findOutMoreButton,
+  .playDemoButton {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .heroImage {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .planeIcon {
+    width: 70px;
+    right: -30px;
+    top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContainer {
+    padding: 0;
+    padding-top: 7rem;
+    width: 80%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .heroImage {
+    width: 300px;
+  }
+
+  .planeIcon {
+    width: 80px;
+    right: -40px;
+    top: 10px;
+  }
+
+  .findOutMoreButton,
+  .playDemoButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+.planeIcon {
+  position: absolute;
+  top: 20px;
+  right: -50px;
+  width: 120px;
+  animation: fly 5s linear infinite alternate;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-200px);
+  }
+}

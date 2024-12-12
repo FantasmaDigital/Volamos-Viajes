@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2022",  // Mantén tu objetivo a ES2022, adecuado para Node.js moderno
+    "lib": ["ES2023"],  // Añade 'Node' para tener acceso a los tipos de Node.js
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Modo Bundler */
+    "moduleResolution": "Bundler",  // Esto está bien para Vite
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,  // Mantén 'noEmit' si solo te interesa la validación de tipos sin generar código
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]  // Asegúrate de que tu archivo vite.config.ts esté incluido
+}
