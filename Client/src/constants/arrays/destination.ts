@@ -435,8 +435,58 @@ const destinations: Destination[] = [
       "/img/destinations/estambul-3.jpg",
       "/img/destinations/estambul-4.jpg",
     ]
+  },
+  {
+    name: "AquaNick Punta Cana",
+    package: [
+      {
+        description: "Experimenta un nuevo estándar de diversión y entretenimiento en AquaNick Punta Cana. Disfruta de playas exclusivas, restaurantes variados y el emocionante parque AquaNick con tus personajes favoritos de Nickelodeon.",
+        days: [
+          {
+            avalible: "Monday-Friday",
+            text: "Opera de lunes a viernes de 9:00am a 5:00pm"
+          }
+        ],
+        includes: [
+          "Entrada al Parque AquaNick",
+          "Uso de instalaciones",
+          "Ríos, piscinas, parques infantiles y toboganes",
+          "Snacks y bebidas"
+        ],
+        table: [
+          {
+            title: "Precios",
+            rows: [
+              ["Por Persona", "Precio"],
+              ["Adultos", "$259.00"],
+              ["Niños (2 años en adelante)", "$186.00"]
+            ]
+          }
+        ],
+        policy: [
+          "Traer traje de baño, sombrero para el sol, gafas de sol y toalla de playa.",
+          "Utilice protector solar biodegradable.",
+          "Traer ropa cómoda y cambio de ropa.",
+          "Llevar efectivo o tarjeta de crédito para gastos adicionales y souvenirs."
+        ],
+        avalibleUntil: "No especificado",
+        toursIncluded: [
+          {
+            name: "AquaNick Punta Cana",
+            description: "Un parque acuático lleno de diversión, con encuentros con personajes icónicos de Nickelodeon como Bob Esponja y Patricio.",
+            duration: "9:00am - 5:00pm"
+          }
+        ]
+      }
+    ],
+    images: [
+      "/img/destinations/aqua-nick-3.jpg",
+      "/img/destinations/aqua-nick-2.jpg",
+      "/img/destinations/aqua-nick-1.jpg",
+      "/img/destinations/aqua-nick-4.jpg",
+      "/img/destinations/aqua-nick-5.jpg"
+    ]
   }
-
 ];
 
 export default destinations;

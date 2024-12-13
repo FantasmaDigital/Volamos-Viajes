@@ -45,5 +45,10 @@
     <lastmod>2024-12-12T17:34:46+00:00</lastmod>
     <priority>0.7</priority> <!-- Página de Estambul -->
   </url>
+  <url>
+    <loc>https://volamosviajes.com/view/aquanick</loc>
+    <lastmod>2024-12-12T17:34:46+00:00</lastmod>
+    <priority>0.7</priority> <!-- Página de AquaNick -->
+  </url>
 
 </urlset>

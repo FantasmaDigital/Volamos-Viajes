@@ -1,11 +1,11 @@
 {
   "name": "Volamos Viajes",
   "short_name": "Volamos",
-  "description": "Reserva fácil y rápida para tus próximas vacaciones con ofertas exclusivas de Volamos Viajes.",
+  "description": "Reserva fácil y rápido para tus próximas vacaciones con ofertas exclusivas de Volamos Viajes.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#0e3d5e",
   "theme_color": "#0e3d5e",
   "icons": [
     {

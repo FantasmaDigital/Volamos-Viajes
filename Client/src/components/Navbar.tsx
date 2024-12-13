@@ -230,7 +230,7 @@ const Header: React.FC<PropsHeader> = ({ color }) => {
               </button>
             ))}
             {token && user ? (
-              <div className="flex items-center gap-4 pl-5 mt-5">
+              <div className="flex items-center gap-4 pl-0 lg:pl-5 mt-0 lg:mt-5">
                 <Avatar
                   src={userAvatar}
                   alt="Avatar"
