@@ -6,7 +6,6 @@ import { animated } from "@react-spring/web";
 import Separator from "../utils/Separator";
 import { Alert } from "@mui/material";
 import GoogleBTN from "./GoogleBTN";
-import { Helmet } from "react-helmet";
 import { useAuth } from "../context/AuthContext";
 import { usePost } from "../hooks/usePost";
 import { sanitizeInput } from "../utils/functions/sanitizeInput";
