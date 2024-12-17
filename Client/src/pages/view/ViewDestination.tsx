@@ -10,7 +10,6 @@ import Header from "../../components/Navbar";
 import ScrollToTop from "../../components/ScrollTopBtn";
 import Footer from "../../components/Footer";
 import WhatsAppBtn from "../../components/WhatsAppBtn";
-import { Helmet } from "react-helmet";
 import HelmetViewDestination from "../../conf/HelmetViewDestination";
 
 const ViewDestination: React.FC = () => {
