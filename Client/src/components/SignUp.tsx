@@ -9,7 +9,8 @@ import { sanitizeInput } from "../utils/functions/sanitizeInput";
 import Separator from "../utils/Separator";
 import { Alert } from "@mui/material";
 import GoogleBTN from "./GoogleBTN";
-import { Helmet } from "react-helmet";
+import HelmetSignUp from "../conf/HelmetSignUp";
+import { usePost } from "../hooks/usePost";
 
 // Componentes cargados de forma diferida
 const HeaderLogo = React.lazy(() => import("./HeroLogo"));
@@ -22,56 +23,55 @@ const SignUp: React.FC = () => {
   const [showSeverity, setShowSeverity] = useState<"success" | "error" | "warning" | "info" | undefined>(undefined);
   const navigateTo = useNavigate()
 
-  const onSubmit = (data: any) => {
-    fetch(`${import.meta.env.VITE_API_URL}/users/create`, {
-      method: "POST", // Usa POST para enviar datos
-      headers: {
-        "Content-Type": "application/json", // El servidor debe esperar JSON
-      },
-      body: JSON.stringify({
-        name: sanitizeInput(data.name),
-        lastname: sanitizeInput(data.lastname),
-        email: sanitizeInput(data.email),
-        phoneNumber: sanitizeInput(data.phone),
-        password: sanitizeInput(data.password),
-        country: country,
-      }),
-    })
-      .then(response => {
-        if (response.status === 201) {
-          setShowSeverity("success");
-          setShowMessage("Te has registrado correctamente.");
-          setStateMessage(true);
-          setTimeout(() => {
-            setStateMessage(false);
-            navigateTo('/signin')
-          }, 1500);
-        } else if (response.status === 400) {
-          setShowSeverity("error");
-          setShowMessage("El usuario ya existe");
-          setStateMessage(true);
-          setTimeout(() => {
-            setStateMessage(false);
-          }, 5000);
-        } else {
-          setShowSeverity("error");
-          setShowMessage("Hubo un error al registrarse");
-          setStateMessage(true);
-          setTimeout(() => {
-            setStateMessage(false);
-          }, 5000);
-        }
-      })
-      .then(data => {
-        console.log("Success:", data); // Maneja los datos devueltos
-      })
-      .catch(error => {
-        console.error("Error:", error); // Maneja cualquier error
-        alert("Ocurrió un error al registrarse."); // Muestra un mensaje al usuario
-      });
+  const { loading, dataPost, error, status, postData } = usePost({
+    url: `${import.meta.env.VITE_API_URL}/users/create`,
+    body: {},
+  });
 
-    console.log(data); // Solo para depuración
+  const onSubmit = (data: any) => {
+    postData({
+      name: sanitizeInput(data.name),
+      lastname: sanitizeInput(data.lastname),
+      email: sanitizeInput(data.email),
+      phoneNumber: sanitizeInput(data.phone),
+      password: sanitizeInput(data.password),
+      country: country,
+    });
   };
+
+  useEffect(() => {
+    if (dataPost) {
+        console.log(dataPost);
+      if (status === 201) {
+        setShowSeverity("success");
+        setShowMessage("Te has registrado correctamente.");
+        setStateMessage(true);
+
+        setTimeout(() => {
+          setStateMessage(false);
+          navigateTo('/signin');
+        }, 1500);
+      } else if (dataPost.message) {
+        setShowSeverity("error");
+        setShowMessage(dataPost.message);
+        setStateMessage(true);
+
+        setTimeout(() => {
+          setStateMessage(false);
+        }, 5000);
+      }
+    }
+
+    if (error) {
+      setShowSeverity("error");
+      setShowMessage(error);
+      setStateMessage(true);
+
+      setTimeout(() => {
+        setStateMessage(false);
+      }, 5000);
+    }
+  }, [dataPost, error]);
 
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
@@ -94,62 +94,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="flex min-h-screen py-10 md:py-0">
-      <Helmet>
-        {/* Meta etiquetas generales */}
-        <title>Registro | Volamos Viajes - Crea tu cuenta y empieza a planificar tus vacaciones</title>
-        <meta
-          name="description"
-          content="Crea tu cuenta en Volamos Viajes y accede a nuestras ofertas exclusivas de paquetes, destinos y promociones para tus próximas vacaciones. ¡Comienza ahora!"
-        />
-        <meta
-          name="keywords"
-          content="registro, crear cuenta, viajes, vacaciones, paquetes, ofertas, Volamos Viajes, nuevos usuarios, inscripción"
-        />
-        <meta name="author" content="Volamos Viajes" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="robots" content="index, follow" />
-
-        {/* Meta etiquetas Open Graph para redes sociales */}
-        <meta property="og:title" content="Registro | Volamos Viajes - Crea tu cuenta y empieza a planificar tus vacaciones" />
-        <meta
-          property="og:description"
-          content="Crea tu cuenta en Volamos Viajes y accede a nuestras ofertas exclusivas de paquetes, destinos y promociones para tus próximas vacaciones. ¡Comienza ahora!"
-        />
-        <meta property="og:image" content="https://volamosviajes.com/img/logo.png" />
-        <meta property="og:image:alt" content="Crear cuenta en Volamos Viajes" />
-        <meta property="og:url" content="https://volamosviajes.com/signup" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="es_ES" />
-
-        {/* Meta etiquetas para Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Registro | Volamos Viajes - Crea tu cuenta y empieza a planificar tus vacaciones" />
-        <meta
-          name="twitter:description"
-          content="Crea tu cuenta en Volamos Viajes y accede a nuestras ofertas exclusivas de paquetes, destinos y promociones para tus próximas vacaciones. ¡Comienza ahora!"
-        />
-        <meta name="twitter:image" content="https://volamosviajes.com/img/logo.png" />
-        <meta name="twitter:image:alt" content="Crear cuenta en Volamos Viajes" />
-        <meta name="twitter:site" content="@VolamosViajes" />
-        <meta name="twitter:creator" content="@VolamosViajes" />
-
-        {/* Meta etiquetas adicionales */}
-        <link rel="canonical" href="https://volamosviajes.com/signup" />
-        <meta property="og:site_name" content="Volamos Viajes" />
-        <meta name="theme-color" content="#0e3d5e" />
-        <meta name="apple-mobile-web-app-title" content="Volamos Viajes" />
-        <meta name="application-name" content="Volamos Viajes" />
-        <meta name="msapplication-TileColor" content="#1f567a" />
-        <meta name="msapplication-TileImage" content="https://volamosviajes.com/img/logo.png" />
-
-        {/* Favicon y recursos */}
-        <link rel="icon" href="https://volamosviajes.com/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" sizes="180x180" href="https://volamosviajes.com/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="https://volamosviajes.com/img/favicon-32x32.png" />
-        <link rel="manifest" href="https://volamosviajes.com/site.webmanifest" />
-      </Helmet>
-
+      <HelmetSignUp />
       <div
         className="hidden lg:flex w-[55%] bg-cover bg-center relative"
         style={{
@@ -340,17 +285,14 @@ const SignUp: React.FC = () => {
             <button
               type="submit"
               className="w-full bg-primary text-white py-3 rounded-sm hover:bg-secondary transition duration-200"
+              disabled={loading}
             >
-              Registrarse
+              {loading ? "Cargando..." : "Iniciar sesión"}
             </button>
-
-            {/* Separador */}
             <Separator />
-
-            {/* Botón de registro con Google */}
             <Suspense fallback={<div>Loading...</div>}>
               <animated.div style={googleSpring} ref={googleRef}>
-                <GoogleBTN text="signup_with" />
+                <GoogleBTN text="signin_with" />
               </animated.div>
             </Suspense>
           </div>

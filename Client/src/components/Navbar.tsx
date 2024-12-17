@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeroLogo from "./HeroLogo";
-import Cookies from "js-cookie";
 import { Menu, MenuItem, Avatar, ListItemIcon } from "@mui/material";
 import { Logout } from "@mui/icons-material";
 import classNames from "classnames";
 import MiniPromoCarousel from "../utils/MiniPromoCarousel";
+import { useAuth } from "../context/AuthContext";
 
 interface PropsHeader {
   color?: string;
@@ -13,15 +13,16 @@ interface PropsHeader {
 
 const Header: React.FC<PropsHeader> = ({ color }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState<{ name: string; lastname: string; avatar?: string } | null>(null);
+  const { getUser, getToken, logout } = useAuth()
+
+  const [user, setUser] = useState<{ name: string; lastname: string; avatar?: string } | null>(getUser());
+  const [token] = useState<string | undefined>(getToken())
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [userAvatar, setUserAvatar] = useState<string | undefined>("/img/avatar/default-avatar.png");
   const [menuOpen] = useState(false); // Estado para la hamburguesa
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Estado para el nuevo navbar en móvil
 
-  const token = Cookies.get("authToken");
   const navigateTo = useNavigate();
-  const storedUser = localStorage.getItem("user");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -32,14 +33,6 @@ const Header: React.FC<PropsHeader> = ({ color }) => {
   useEffect(() => {
     setUserAvatar(user?.avatar);
   }, [user]);
-
-  useEffect(() => {
-    if (token) {
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
-    }
-  }, [token]);
 
   const smoothScrollToSection = (sectionId: string) => {
     const currentPath = window.location.pathname;
@@ -65,8 +58,7 @@ const Header: React.FC<PropsHeader> = ({ color }) => {
   };
 
   const handleLogout = () => {
-    Cookies.remove("authToken");
-    localStorage.removeItem("user");
+    logout()
     setUser(null);
     window.location.reload();
     handleCloseMenu();
@@ -207,7 +199,7 @@ const Header: React.FC<PropsHeader> = ({ color }) => {
             </div>
           </nav>
         </div>
-        <MiniPromoCarousel/>
+        <MiniPromoCarousel />
       </header>
 
       {/* Navbar para móviles */}
