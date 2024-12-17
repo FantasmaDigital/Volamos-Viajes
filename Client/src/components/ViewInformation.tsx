@@ -146,7 +146,7 @@ const ViewInformation: React.FC<PropsViewInformation> = ({ destination }) => {
                 </section>
 
                 {/* Sección lateral (aside) */}
-                <section className="w-full sm:w-[70%] lg:w-1/2 flex flex-col m-auto justify-center">
+                <section className="w-full sm:w-[70%] lg:w-[60%] flex flex-col mx-auto">
                     <ViewAsideRightMemo destination={destination.name} />
                 </section>
             </div>
