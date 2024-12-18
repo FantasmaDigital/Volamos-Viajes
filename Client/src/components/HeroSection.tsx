@@ -27,7 +27,6 @@ const HeroSection: React.FC = () => {
     const sanitizedEmail = sanitizeInput(formData.email);
     const sanitizedDestination = sanitizeInput(formData.destination);
 
-    // Aquí va el código para enviar el correo
     emailjs
       .send(
         import.meta.env.VITE_SERVICE_ID, // Reemplaza con tu ID de servicio de EmailJS

@@ -7,6 +7,7 @@ import SignUp from "./components/SignUp";
 import ResetPassword from "./components/ResetPassword";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import NewPassword from "./components/NewPassword";
+import GuideHome from "./pages/guide/GuideHome";
 
 const App: React.FC = () => {
   return (
@@ -18,11 +19,14 @@ const App: React.FC = () => {
         {/* Protected SignIn and SignUp routes */}
         <Route path="/signin" element={<ProtectedRoute><SignIn /></ProtectedRoute>} />
         <Route path="/signup" element={<ProtectedRoute><SignUp /></ProtectedRoute>} />
-        <Route path="/new-password/:token" element={<NewPassword/>} />
+        <Route path="/new-password/:token" element={<NewPassword />} />
 
         {/* Other routes */}
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/view/:id" element={<ViewDestination />} />
+
+        {/* Guide route */}
+        {/* <Route path="/guide" element={<GuideHome />} /> */}
 
         {/* Route page not found */}
         <Route path="*" element={<h1>Page not found</h1>} />

@@ -9,9 +9,10 @@ import { useAuth } from "../context/AuthContext";
 
 interface PropsHeader {
   color?: string;
+  showPromoCarousel?: boolean;
 }
 
-const Header: React.FC<PropsHeader> = ({ color }) => {
+const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel=true }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { getUser, getToken, logout } = useAuth()
 
@@ -199,7 +200,9 @@ const Header: React.FC<PropsHeader> = ({ color }) => {
             </div>
           </nav>
         </div>
-        <MiniPromoCarousel />
+        {
+          showPromoCarousel && <MiniPromoCarousel />
+        }
       </header>
 
       {/* Navbar para móviles */}
