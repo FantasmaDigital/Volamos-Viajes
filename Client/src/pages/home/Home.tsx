@@ -18,6 +18,7 @@ import PromotionPackage from "../../components/PromotionPackage";
 import PromoPopUp from "../../utils/PromoPopUp";
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import HelmetHome from "../../conf/HelmetHome";
+import NewSection from "../../components/NewSection";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -93,6 +94,7 @@ const Home: React.FC = () => {
       <WhatsAppBtn />
       <SpeedInsights />
       <ScrollToTop />
+      <NewSection/>
     </div>
   );
 };
