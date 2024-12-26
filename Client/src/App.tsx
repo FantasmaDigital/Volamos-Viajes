@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Route path="/view/:id" element={<ViewDestination />} />
 
         {/* Guide route */}
-        {/* <Route path="/guide" element={<GuideHome />} /> */}
+        <Route path="/guide" element={<GuideHome />} />
 
         {/* Route page not found */}
         <Route path="*" element={<h1>Page not found</h1>} />

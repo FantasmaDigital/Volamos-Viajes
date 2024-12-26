@@ -8,7 +8,7 @@ const GuideHome:React.FC = () => {
         <div className='w-full h-full'>
             <Header color='white' showPromoCarousel={false}/>
             <GuideBanner/>
-            <Footer />
+            <Footer isMain={false}/>
         </div>
     );
 }
