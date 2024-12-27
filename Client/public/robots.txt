@@ -1,6 +1,8 @@
 # Permitir el acceso a todos los motores de búsqueda
 User-agent: *
 Allow: /
+Allow: /sitemap.xml
+Allow: /atom.xml
 
 # Bloquear acceso a rutas sensibles o irrelevantes para SEO
 Disallow: /admin/
