@@ -25,11 +25,11 @@ const PromoPopUp: React.FC = () => {
     // Only show the pop-up if we are on the "/" route and it hasn't been shown recently
     const currentPath = window.location.pathname;
     const lastShownTimestamp = localStorage.getItem("lastPromoPopupShown");
-    const fiveMinutesInMilliseconds = 5 * 60 * 1000;
+    const teenMinutesInMilliseconds = 10 * 60 * 1000;
     const currentTime = new Date().getTime();
 
     // If we are on the home route and the popup hasn't been shown recently
-    if (currentPath === "/" && (!lastShownTimestamp || currentTime - Number(lastShownTimestamp) > fiveMinutesInMilliseconds)) {
+    if (currentPath === "/" && (!lastShownTimestamp || currentTime - Number(lastShownTimestamp) > teenMinutesInMilliseconds)) {
       // Show the SweetAlert2 pop-up
       Swal.fire({
         html: `

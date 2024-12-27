@@ -15,6 +15,7 @@ export default {
         cardBackground: '#ffffff',    // Fondo de Tarjetas
         accentBackground: '#d1dae0',  // Fondo de Encabezados o CTA
         text: '#333333',              // Gris Oscuro para el Texto
+        extraBlue: '#4777a7',         // Azul Extra
       },
       textShadow: {
         'custom': '4px 2px 4px #000',
