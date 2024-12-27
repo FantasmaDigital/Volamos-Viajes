@@ -1,4 +1,4 @@
 # Permitir el acceso a todos los motores de búsqueda
 User-agent: *
 Disallow: 
-Sitemap: https://volamosviajes.com/sitemap.xml
+Sitemap: https://volamosviajes.com/volamos-sitemap.xml
