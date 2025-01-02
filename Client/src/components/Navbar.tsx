@@ -244,7 +244,7 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
                   className="ml-2"
                   sx={{ padding: "8px", borderRadius: "50%" }}
                 >
-                  <Logout fontSize="small" className="text-black" />
+                  <Logout fontSize="small" sx={{ color: "white" }} />
                 </IconButton>
               </div>
             ) : (
