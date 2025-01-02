@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeroLogo from "./HeroLogo";
-import { Menu, MenuItem, Avatar, ListItemIcon } from "@mui/material";
+import { Menu, MenuItem, Avatar, ListItemIcon, IconButton } from "@mui/material";
 import { Logout } from "@mui/icons-material";
 import classNames from "classnames";
 import MiniPromoCarousel from "../utils/MiniPromoCarousel";
@@ -12,7 +12,7 @@ interface PropsHeader {
   showPromoCarousel?: boolean;
 }
 
-const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel=true }) => {
+const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { getUser, getToken, logout } = useAuth()
 
@@ -227,40 +227,31 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel=true }) => {
             {token && user ? (
               <div className="flex items-center gap-4 pl-0 lg:pl-5 mt-0 lg:mt-5">
                 <Avatar
-                  src={userAvatar}
+                  src={user.avatar}
                   alt="Avatar"
                   className="cursor-pointer"
                   sx={{ width: 48, height: 48 }}
-                  onClick={handleAvatarClick}
                 />
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleCloseMenu}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      overflow: "visible",
-                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                      mt: 1.5,
-                    },
-                  }}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                <div className="flex flex-col gap-1">
+                  <span className="text-white text-center font-semibold">Usuario</span>
+                  <span className="text-white">
+                    {user.name.split(" ")[0]} {user.lastname.split(" ")[0]}
+                  </span>
+                </div>
+                <IconButton
+                  color="inherit"
+                  onClick={handleLogout}
+                  className="ml-2"
+                  sx={{ padding: "8px", borderRadius: "50%" }}
                 >
-                  <MenuItem onClick={handleLogout}>
-                    <ListItemIcon>
-                      <Logout fontSize="small" className="text-black" />
-                    </ListItemIcon>
-                    Cerrar sesión
-                  </MenuItem>
-                </Menu>
+                  <Logout fontSize="small" className="text-black" />
+                </IconButton>
               </div>
             ) : (
               <>
                 <button
                   className={classNames(
-                    "py-2 px-5 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
+                    "py-2 px-5 min-w-44 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
                     isScrolled ? "bg-white text-primary hover:bg-gray-200" : "bg-transparent text-white shadow-md"
                   )}
                   onClick={() => navigateTo("/signin")}
@@ -269,7 +260,7 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel=true }) => {
                 </button>
                 <button
                   className={classNames(
-                    "py-2 px-5 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
+                    "py-2 px-5 min-w-44 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
                     isScrolled ? "bg-secondary text-white" : "bg-white text-secondary"
                   )}
                   onClick={() => navigateTo("/signup")}

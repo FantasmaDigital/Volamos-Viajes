@@ -74,6 +74,7 @@ const GoogleBTN: React.FC<{ text: "signin_with" | "signup_with" | "continue_with
         text={text}
         containerProps={{
           className: "w-full shadow-xl",
+          style: { minWidth: "100%" }, // Garantiza que el botón ocupe al menos el 100% del ancho.
         }}
       />
       {loading && <p className="text-gray-500 mt-2">Autenticando...</p>}

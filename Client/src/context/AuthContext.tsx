@@ -35,7 +35,6 @@ const setToken = (token: string) => {
         sameSite: 'Strict',
         path: '/',
     });
-    console.log('save token', Cookies.get('data:ath-tk')); // Ahora debería imprimir el valor
 };
 
 
@@ -46,7 +45,6 @@ const getToken = (): string | undefined => {
 const saveUser = (user: User) => {
     const encryptedUser = encryptData(user); // Encriptamos el usuario antes de guardarlo
     Cookies.set('data:usr-inf', encryptedUser, { expires: 7, secure: true, sameSite: 'Strict' });
-    console.log('save user')
 };
 
 const getUser = (): User | null => {

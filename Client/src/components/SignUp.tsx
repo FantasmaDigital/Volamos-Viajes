@@ -41,7 +41,6 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     if (dataPost) {
-        console.log(dataPost);
       if (status === 201) {
         setShowSeverity("success");
         setShowMessage("Te has registrado correctamente.");
