@@ -30,7 +30,7 @@ const Testimonial: React.FC = () => {
         <div className="w-[95%] sm:w-[80%] mx-auto text-white">
           <div className="grid grid-cols-3 gap-6">
             {testimonials.map((testimonial, i) => (
-              <div className={`glass col-span-3 lg:col-span-1 w-full mx-auto`} key={i}>
+              <div className={`glass col-span-3 lg:col-span-1 w-full mx-auto hover:scale-105 transition-all duration-200 hover:cursor-pointer`} key={i}>
                 <div className="h-full p-6">
                   <div className="flex items-center mb-6">
                     <div className="mr-3">
@@ -59,8 +59,6 @@ const Testimonial: React.FC = () => {
               </div>
             ))}
           </div>
-
-
         </div>
       </div>
     </section>
