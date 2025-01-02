@@ -13,7 +13,7 @@ const IntroSection: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPromoIndex((prevIndex) => (prevIndex + 1) % promotions.length);
-    }, 5000);
+    }, 3000); // Reducir el intervalo a 3 segundos
     return () => clearInterval(interval);
   }, []);
 
@@ -41,6 +41,7 @@ const IntroSection: React.FC = () => {
               src="https://di-uploads-pod10.dealerinspire.com/schumachereuropeanredesign/uploads/2021/11/1000x400_Model_Image-2.png"
               alt="Rental Cars"
               className="w-full sm:w-[80%] rounded-md m-auto"
+              loading="lazy" // Implementación de carga diferida
             />
           </div>
           <div className="md:w-full md:pr-6">
@@ -71,6 +72,7 @@ const IntroSection: React.FC = () => {
               height="500"
               className="rounded-sm border-2"
               title="Car Rental Search"
+              loading="lazy" // Implementación de carga diferida
             />
           )}
         </motion.div>
