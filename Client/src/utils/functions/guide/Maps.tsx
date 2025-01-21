@@ -1,28 +1,4 @@
-import React from "react";
-
-interface HandleSearchStartPointProps {
-  map: any;
-  startPoint: any;
-  endPoint: any;
-  setRestaurants: any;
-}
-
-interface GetCurrentLocationProps {
-  setDefaultRoute: any;
-}
-
-interface CurrentRouteValidationProps {
-  startPoint: any;
-  endPoint: any;
-  directionsRenderer: any;
-  setEstimatedTime: any;
-  travelMode: any;
-}
-
-type LatLng = {
-  lat: number;
-  lng: number;
-};
+import { CurrentRouteValidationProps, GetCurrentLocationProps, HandleSearchStartPointProps, LatLng } from "../../../interface/guide/extra.points";
 
 declare const google: any;
 
@@ -59,7 +35,7 @@ export const getCurrentLocation: React.FC<GetCurrentLocationProps> = ({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        console.log("Ubicación actual:", currentLocation);
+        
         setDefaultRoute(currentLocation);
       },
       (error) => {

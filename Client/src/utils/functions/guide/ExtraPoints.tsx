@@ -1,30 +1,4 @@
-import React from "react";
-
-interface DirectionsResult {
-  routes: {
-    overview_path: google.maps.LatLng[];
-    legs: {
-      duration: {
-        text: string;
-      };
-    }[];
-  }[];
-}
-
-interface PlacesServiceResult {
-  place_id: string;
-}
-
-interface NearbySearchRequest {
-  location: LatLng;
-  radius: number;
-  type: string;
-}
-
-type LatLng = {
-  lat: number;
-  lng: number;
-};
+import { DirectionsResult, LatLng, NearbySearchRequest, PlacesServiceResult, Restaurant } from "../../../interface/guide/extra.points";
 
 declare const google: any;
 
@@ -105,3 +79,68 @@ export const findRestaurantsOnRoute = ({
     }
   );
 };
+
+export const handleCheckboxChange = ({
+  restaurant,
+  map,
+  markers,
+  setMarkers,
+  setRestaurantsInStorage,
+}:{
+  restaurant: Restaurant
+  map: any,
+  markers: Array<{ placeId: string; marker: any }>,
+  setMarkers: (markers: Array<{ placeId: string; marker: any }> | ((prev: Array<{ placeId: string; marker: any }>) => Array<{ placeId: string; marker: any }>)) => void,
+  setRestaurantsInStorage: (restaurants: Restaurant[]) => void,
+}) => {
+  // Obtener los restaurantes seleccionados desde el localStorage
+  const storedSelectedRestaurants = JSON.parse(localStorage.getItem('selectedRestaurants') || '[]');
+
+  // Verificar si el restaurante ya está seleccionado
+  const isSelected: boolean = storedSelectedRestaurants.some(
+    (item: { id: string }) => item.id === restaurant.place_id
+  );
+
+  console.log(isSelected);
+
+  if (!isSelected) {
+    // Crear el objeto con el formato correcto
+    const restaurantToAdd = {
+      id: restaurant.place_id,
+      location: restaurant.geometry.location,
+      name: restaurant.name,
+      icon: restaurant.icon,
+    };
+    const updatedSelectedRestaurants = [...storedSelectedRestaurants, restaurantToAdd];
+    localStorage.setItem('selectedRestaurants', JSON.stringify(updatedSelectedRestaurants));
+    const newMarker = new google.maps.Marker({
+      position: restaurant.geometry.location, // Coordenadas del restaurante
+      map,  // El mapa donde se debe colocar el marcador
+      title: restaurant.name,  // Título del marcador
+    });
+    setRestaurantsInStorage(updatedSelectedRestaurants);
+    setMarkers([
+      ...markers,
+      { placeId: restaurant.place_id, marker: newMarker },
+    ]);
+  } else {
+    const updatedSelectedRestaurants = storedSelectedRestaurants.filter(
+      (item: { id: string }) => item.id !== restaurant.place_id
+    );
+    localStorage.setItem('selectedRestaurants', JSON.stringify(updatedSelectedRestaurants));
+    setMarkers((prev: Array<{ placeId: string; marker: any }>) => {
+      const markerToRemove = prev.find(
+      (marker) => marker.placeId === restaurant.place_id
+      );
+      if (markerToRemove) {
+      markerToRemove.marker.setMap(null);
+      }
+      return prev.filter((marker) => marker.placeId !== restaurant.place_id);
+    });
+    setRestaurantsInStorage(updatedSelectedRestaurants);
+  }
+};
+
+export const clearStorage = () =>{
+  localStorage.removeItem('selectedRestaurants');
+}
