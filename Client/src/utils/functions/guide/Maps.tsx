@@ -98,3 +98,10 @@ export const handlePlaceChange = (
     }
   });
 };
+
+export const centerOnStartPoint = (map: any, startPoint: any) => {
+  if (map && startPoint) {
+    map.setCenter(new google.maps.LatLng(startPoint.lat, startPoint.lng));
+    map.setZoom(20); // Ajusta el zoom si es necesario
+  }
+};

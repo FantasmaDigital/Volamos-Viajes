@@ -138,6 +138,7 @@ export const handleCheckboxChange = ({
       return prev.filter((marker) => marker.placeId !== restaurant.place_id);
     });
     setRestaurantsInStorage(updatedSelectedRestaurants);
+    // markSelectedRestaurants()
   }
 };
 

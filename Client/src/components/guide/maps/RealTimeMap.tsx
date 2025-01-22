@@ -25,9 +25,20 @@ const RealTimeMap: React.FC = () => {
   const startInputRef = useRef<HTMLInputElement>(null);
   const endInputRef = useRef<HTMLInputElement>(null);
   const [markers, setMarkers] = useState<{ placeId: string; marker: any }[]>([]);
-  const [userLocation, setUserLocation] = useState<LatLng | null>(null); // Para almacenar la ubicación actual del usuario
-  const [currentPoint, setCurrentPoint] = useState<'start' | 'restaurant' | 'destination'>('start');
+  const [currentPointIndex, setCurrentPointIndex] = useState(0); 
+  const points = [
+    startPoint,
+    ...restaurantsInStorage.map((restaurant) => restaurant.location),
+    endPoint, // Calle Arce
+  ];
+  let userMarker:any = null;
 
+  const centerOnStartPoint = (map:any, startPoint:any) => {
+    if (map && startPoint) {
+      map.setCenter(new google.maps.LatLng(startPoint.lat, startPoint.lng));
+      map.setZoom(20); // Ajusta el zoom si es necesario
+    }
+  };
 
   useEffect(() => {
     if (mapRef.current && !map) {
@@ -37,7 +48,7 @@ const RealTimeMap: React.FC = () => {
         zoom: 17,
       });
       setMap(newMap);
-
+  
       const renderer = new google.maps.DirectionsRenderer({
         map: newMap,
         suppressMarkers: false,
@@ -47,37 +58,36 @@ const RealTimeMap: React.FC = () => {
         },
       });
       setDirectionsRenderer(renderer);
-
+  
       // Geolocalización
       if (navigator.geolocation) {
         navigator.geolocation.watchPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
             const newLocation = { lat: latitude, lng: longitude };
-            setUserLocation(newLocation);
+  
+            setStartPoint(newLocation);
+  
             newMap.setCenter(newLocation);
-
-            // Aquí podemos implementar la lógica para verificar si el usuario está siguiendo la ruta
-            // O si se ha desviado del camino
-            if (startPoint && endPoint) {
-              const distanceToRoute = google.maps.geometry.spherical.computeDistanceBetween(
-                new google.maps.LatLng(newLocation.lat, newLocation.lng),
-                new google.maps.LatLng(startPoint.lat, startPoint.lng)
-              );
-
-              // Si el usuario está demasiado alejado, recalcular la ruta
-              if (distanceToRoute > 50) {
-                calculateRoute(); // Recalcular la ruta si se desvía demasiado
-              }
+  
+            if (userMarker) {
+              userMarker.setMap(null); // Elimina el marcador anterior
             }
+  
+            userMarker = new google.maps.Marker({
+              position: newLocation,
+              map: newMap,
+              title: "Tu ubicación actual",
+              animation: google.maps.Animation.DROP, // Animación de caída
+            });
           },
           (error) => console.error("Error en la geolocalización: ", error),
           { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
         );
       }
     }
-  }, [mapRef, map, defaultRoute, startPoint, endPoint]);
-
+  }, [mapRef, map, defaultRoute]);
+  
   const calculateRoute = useCallback(() => {
     currentRouteValidation({
       startPoint,
@@ -107,7 +117,7 @@ const RealTimeMap: React.FC = () => {
       const existingMarker = markers.find(
         (marker) => marker.placeId === restaurant.id
       );
-  
+
       // Si el marcador ya existe, no crearlo nuevamente
       if (!existingMarker) {
         const newMarker = new google.maps.Marker({
@@ -115,14 +125,14 @@ const RealTimeMap: React.FC = () => {
           map,
           title: restaurant.name,
         });
-  
+
         setMarkers((prev) => [
           ...prev,
           { placeId: restaurant.id, marker: newMarker },
         ]);
       }
     });
-  
+
     if (startPoint && endPoint) {
       const waypoints = restaurantsInStorage
         .map((restaurant) => {
@@ -132,7 +142,7 @@ const RealTimeMap: React.FC = () => {
           };
         })
         .filter((waypoint) => waypoint !== null);
-  
+
       // Recalcular la ruta
       const directionsService = new google.maps.DirectionsService();
       const request = {
@@ -142,27 +152,27 @@ const RealTimeMap: React.FC = () => {
         waypoints: waypoints as google.maps.DirectionsWaypoint[], // Añadir las paradas intermedias
         optimizeWaypoints: true, // Opcional: optimiza el orden de las paradas
       };
-  
+
       directionsService.route(
         request,
         (result: google.maps.DirectionsResult, status: google.maps.DirectionsStatus) => {
           if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
-  
+
             // Calcular el tiempo estimado de la ruta
             const duration = result.routes[0].legs.reduce(
               (acc: number, leg: google.maps.DirectionsLeg) =>
                 acc + (leg.duration ? leg.duration.value : 0),
               0
             );
-  
+
             setEstimatedTime(
               new Date(duration * 1000).toISOString().substr(11, 8)
             ); // Convertir segundos a formato de tiempo
           } else {
             setEstimatedTime(
               new Date(0 * 1000).toISOString().substr(11, 8)
-            ); 
+            );
             console.error("Error al calcular la ruta:", status);
           }
         }
@@ -170,62 +180,30 @@ const RealTimeMap: React.FC = () => {
     }
   };
 
-
   const goToNextPoint = () => {
-    if (currentPoint === 'start' && restaurantsInStorage.length > 0) {
-      // Ruta inicial: Colonia Escalón -> Burger King
-      const firstRestaurant = restaurantsInStorage[0];
+    if (currentPointIndex < points.length - 1) {
       const directionsService = new google.maps.DirectionsService();
-      const requestToRestaurant = {
-        origin: startPoint,
-        destination: firstRestaurant.location,
+      const request = {
+        origin: points[currentPointIndex],
+        destination: points[currentPointIndex + 1],
         travelMode,
         waypoints: [],
         optimizeWaypoints: false,
       };
 
       directionsService.route(
-        requestToRestaurant,
+        request,
         (result: google.maps.DirectionsResult, status: google.maps.DirectionsStatus) => {
           if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
-            setCurrentPoint('restaurant'); // Ahora estamos en el restaurante
+            setCurrentPointIndex((prevIndex) => prevIndex + 1); // Mover al siguiente punto
           } else {
-            console.error("Error al calcular la ruta al restaurante:", status);
+            console.error(`Error al calcular la ruta entre puntos [${currentPointIndex}] y [${currentPointIndex + 1}]:`, status);
           }
         }
       );
-    } else if (currentPoint === 'restaurant' && endPoint) {
-      // Ruta siguiente: Burger King -> Calle Arce
-      const directionsService = new google.maps.DirectionsService();
-      const requestToDestination = {
-        origin: restaurantsInStorage[0].location, // Burger King
-        destination: endPoint, // Calle Arce
-        travelMode,
-        waypoints: [],
-        optimizeWaypoints: false,
-      };
-
-      directionsService.route(
-        requestToDestination,
-        (result: google.maps.DirectionsResult, status: google.maps.DirectionsStatus) => {
-          if (status === google.maps.DirectionsStatus.OK) {
-            directionsRenderer.setDirections(result);
-            setCurrentPoint('destination'); // Ahora estamos en el destino final
-          } else {
-            console.error("Error al calcular la ruta al destino final:", status);
-          }
-        }
-      );
-    }
-  };
-
-
-  // Función para centrar el mapa en el punto A (startPoint)
-  const centerOnStartPoint = () => {
-    if (map && startPoint) {
-      map.setCenter(new google.maps.LatLng(startPoint.lat, startPoint.lng));
-      map.setZoom(20); // Ajusta el zoom si es necesario
+    } else {
+      console.log("Todos los puntos han sido visitados.");
     }
   };
 
@@ -275,16 +253,20 @@ const RealTimeMap: React.FC = () => {
       {/* Botón para centrar el mapa en el punto A */}
       <button
         className="absolute bottom-4 left-4 bg-blue-500 text-white p-2 rounded"
-        onClick={centerOnStartPoint}
+        onClick={()=>centerOnStartPoint(map, startPoint)}
       >
         Acercar al punto A
       </button>
       <button
-        className="absolute bottom-4 right-4 bg-green-500 text-white p-2 rounded"
+        className={`absolute bottom-4 right-4 p-2 rounded  ${currentPointIndex < points.length - 1
+            ? 'bg-green-500 text-white cursor-pointer'
+            : 'bg-gray-400 text-gray-200 cursor-not-allowed'}`}
         onClick={goToNextPoint}
-        disabled={currentPoint === 'destination'} // Deshabilitar cuando estemos en el destino final
+        disabled={currentPointIndex >= points.length - 1} // Deshabilitar en el último punto
+        aria-disabled={currentPointIndex >= points.length - 1}
+        aria-label="Go to the next point"
       >
-        Ir al siguiente punto
+        {currentPointIndex < points.length - 1 ? 'Next Point' : 'End of Route'}
       </button>
     </div>
   );
