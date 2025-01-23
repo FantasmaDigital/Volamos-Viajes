@@ -4,13 +4,16 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './context/AuthContext.tsx';
+import { LocationProvider } from './context/guide/LocationContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider>
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <App />
-      </GoogleOAuthProvider>
-    </AuthProvider>
+    <LocationProvider>
+      <AuthProvider>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+          <App />
+        </GoogleOAuthProvider>
+      </AuthProvider>
+    </LocationProvider>
   </StrictMode>,
 )

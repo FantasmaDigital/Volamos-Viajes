@@ -1,13 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PiBus, PiCameraLight, PiMapTrifoldFill, PiPersonSimpleWalkLight } from 'react-icons/pi';
 import { IoFastFoodOutline } from 'react-icons/io5';
+import { useLocation } from '../../context/guide/LocationContext';
 
 const GuideBanner: React.FC = () => {
-    const [activeForm, setActiveForm] = useState<string | null>(null);
+    const locationContext = useLocation();
 
-    const handleIconClick = (form: string) => {
-        setActiveForm(activeForm === form ? null : form);
-    };
+    const touristTypes = [
+        // 'amusement_park',
+        // 'aquarium',
+        // 'art_gallery',
+        'casino',
+        // 'church',
+        'museum',
+        // 'night_club',
+        // 'park',
+        // 'shopping_mall',
+        // 'stadium',
+        // 'zoo',
+        // 'hindu_temple',
+        // 'synagogue',
+        // 'tourist_attraction',
+        // 'monument'
+    ];
+
+    const foodTypes = [
+        'restaurant',
+        // 'cafe', 
+        // 'meal_delivery', 
+        // 'meal_takeaway', 
+        // 'bakery', 
+        // 'bar', 
+        // 'brewery', 
+        // 'food', 
+        // 'grocery_or_supermarket', 
+        // 'liquor_store', 
+        // 'ice_cream'
+    ];
+
 
     return (
         <div className="relative bg-blue-900 w-full h-[45rem] sm:h-[30rem] md:h-[35rem] lg:h-[43rem] pt-16 text-white flex flex-col justify-center">
@@ -31,6 +61,7 @@ const GuideBanner: React.FC = () => {
                         <h2 className="text-2xl font-bold sm:text-3xl">
                             The local experience
                         </h2>
+
                         <p className="text-gray-600 py-4 text-sm sm:text-base">
                             You will discover exactly why Bolivia is known as The Land of Hidden Treasures as you will embark on an adventure of a lifetime along the land.
                         </p>
@@ -39,16 +70,16 @@ const GuideBanner: React.FC = () => {
                     {/* Icons with descriptions */}
                     <div className="flex flex-row items-center justify-start gap-6 w-full">
                         {[
-                            { icon: <PiBus className='text-5xl' />, label: 'Travel', form: 'travel' },
-                            { icon: <IoFastFoodOutline className='text-5xl' />, label: 'Food', form: 'food' },
-                            { icon: <PiCameraLight className='text-5xl' />, label: 'Photos', form: 'photos' },
-                            { icon: <PiPersonSimpleWalkLight className='text-5xl' />, label: 'Walk', form: 'walk' },
-                            { icon: <PiMapTrifoldFill className='text-5xl' />, label: 'Tour Guide', form: 'tourGuide' },
-                        ].map(({ icon, label, form }) => (
+                            { icon: <PiBus className='text-5xl' />, label: 'Travel', form: 'travel', type: touristTypes },
+                            { icon: <IoFastFoodOutline className='text-5xl' />, label: 'Food', form: 'food', type: foodTypes },
+                            { icon: <PiCameraLight className='text-5xl' />, label: 'Photos', form: 'photos', type: touristTypes },
+                            { icon: <PiPersonSimpleWalkLight className='text-5xl' />, label: 'Walk', form: 'walk', type: touristTypes },
+                            { icon: <PiMapTrifoldFill className='text-5xl' />, label: 'Tour Guide', form: 'tourGuide', type: touristTypes },
+                        ].map(({ icon, label, form, type }) => (
                             <div
                                 key={form}
-                                className={`flex flex-col items-center text-extraBlue p-4 hover:scale-110 hover:bg-extraBlue hover:text-white transform transition-transform duration-300 ease-in-out w-full text-center cursor-pointer ${activeForm === form ? 'bg-extraBlue text-white' : ''}`}
-                                onClick={() => handleIconClick(form)}
+                                className={`flex flex-col items-center text-extraBlue p-4 hover:scale-110 hover:bg-extraBlue hover:text-white transform transition-transform duration-300 ease-in-out w-full text-center cursor-pointer`}
+                                onClick={() => locationContext.setPlaceOption(type)}
                             >
                                 <div className="text-3xl">{icon}</div>
                                 <span className="mt-2 text-base sm:text-lg">{label}</span>
@@ -58,44 +89,6 @@ const GuideBanner: React.FC = () => {
                 </div>
             </div>
 
-            {/* Form Section */}
-            <div className="relative flex flex-col items-center py-6 px-4">
-                {activeForm === 'travel' && (
-                    <div className="bg-white text-black p-6 w-full max-w-md rounded shadow-md">
-                        <h3 className="text-xl font-bold">Travel Form</h3>
-                        <p className="text-gray-600 py-2">Fill out details about your travel plans.</p>
-                        {/* Add form fields here */}
-                    </div>
-                )}
-                {activeForm === 'food' && (
-                    <div className="bg-white text-black p-6 w-full max-w-md rounded shadow-md">
-                        <h3 className="text-xl font-bold">Food Form</h3>
-                        <p className="text-gray-600 py-2">Share your food preferences.</p>
-                        {/* Add form fields here */}
-                    </div>
-                )}
-                {activeForm === 'photos' && (
-                    <div className="bg-white text-black p-6 w-full max-w-md rounded shadow-md">
-                        <h3 className="text-xl font-bold">Photos Form</h3>
-                        <p className="text-gray-600 py-2">Provide details about your photography interests.</p>
-                        {/* Add form fields here */}
-                    </div>
-                )}
-                {activeForm === 'walk' && (
-                    <div className="bg-white text-black p-6 w-full max-w-md rounded shadow-md">
-                        <h3 className="text-xl font-bold">Walk Form</h3>
-                        <p className="text-gray-600 py-2">Let us know your walking preferences.</p>
-                        {/* Add form fields here */}
-                    </div>
-                )}
-                {activeForm === 'tourGuide' && (
-                    <div className="bg-white text-black p-6 w-full max-w-md rounded shadow-md">
-                        <h3 className="text-xl font-bold">Tour Guide Form</h3>
-                        <p className="text-gray-600 py-2">Tell us what kind of tour guide experience you want.</p>
-                        {/* Add form fields here */}
-                    </div>
-                )}
-            </div>
         </div>
     );
 };
