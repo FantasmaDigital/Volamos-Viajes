@@ -44,7 +44,6 @@ const HelmetSignIn: React.FC = () => {
             <meta name="twitter:creator" content="@VolamosViajes" />
 
             {/* Meta etiquetas adicionales */}
-            <link rel="canonical" href="https://volamosviajes.com/signin" />
             <meta property="og:site_name" content="Volamos Viajes" />
             <meta name="theme-color" content="#0e3d5e" />
             <meta name="apple-mobile-web-app-title" content="Volamos Viajes" />

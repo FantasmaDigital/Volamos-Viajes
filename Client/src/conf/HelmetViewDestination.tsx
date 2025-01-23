@@ -31,7 +31,6 @@ const HelmetViewDestination: React.FC<{ destination: any }> = ({ destination }) 
             <meta name="twitter:creator" content="@VolamosViajes" />
 
             {/* Additional meta tags */}
-            <link rel="canonical" href={`https://volamosviajes.com/${destination.name}`} />
             <meta property="og:site_name" content="Volamos Viajes" />
             <meta name="theme-color" content="#0e3d5e" />
             <meta name="apple-mobile-web-app-title" content="Volamos Viajes" />

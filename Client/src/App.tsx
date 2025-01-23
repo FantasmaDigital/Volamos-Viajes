@@ -7,7 +7,7 @@ import SignUp from "./components/SignUp";
 import ResetPassword from "./components/ResetPassword";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import NewPassword from "./components/NewPassword";
-import GuideHome from "./pages/guide/GuideHome";
+// import GuideHome from "./pages/guide/GuideHome";
 
 const App: React.FC = () => {
   return (
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Route path="/view/:id" element={<ViewDestination />} />
 
         {/* Guide route */}
-        <Route path="/guide" element={<GuideHome />} />
+        {/* <Route path="/guide" element={<GuideHome />} /> */}
 
         {/* Route page not found */}
         <Route path="*" element={<Navigate to="/" replace />} />
