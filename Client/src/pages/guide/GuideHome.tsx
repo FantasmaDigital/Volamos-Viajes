@@ -3,11 +3,11 @@ import Header from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import GuideBanner from "../../components/guide/GuideBanner";
 import RealTimeMap from "../../components/guide/maps/RealTimeMap";
-import DefaultLocationMap from "../../components/guide/maps/DefaultLocationMap";
-import { useLocation } from "../../context/guide/LocationContext";
+// import DefaultLocationMap from "../../components/guide/maps/DefaultLocationMap";
+// import { useLocation } from "../../context/guide/LocationContext";
 
 const GuideHome: React.FC = () => {
-  const { defaultRoute } = useLocation()
+  // const { defaultRoute } = useLocation()
 
   return (
     <div className="w-full h-full">
