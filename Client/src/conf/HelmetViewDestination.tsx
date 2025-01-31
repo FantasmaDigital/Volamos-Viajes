@@ -10,7 +10,7 @@ const HelmetViewDestination: React.FC<{ destination: any }> = ({ destination }) 
             <meta name="author" content="Volamos Viajes" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="robots" content="index, follow" />
+            {/* <meta name="robots" content="index, follow" /> */}
 
             {/* Open Graph */}
             <meta property="og:title" content={`${destination.name} | Volamos Viajes`} />
@@ -35,14 +35,14 @@ const HelmetViewDestination: React.FC<{ destination: any }> = ({ destination }) 
             <meta name="theme-color" content="#0e3d5e" />
             <meta name="apple-mobile-web-app-title" content="Volamos Viajes" />
             <meta name="application-name" content="Volamos Viajes" />
-            <meta name="msapplication-TileColor" content="#1f567a" />
-            <meta name="msapplication-TileImage" content="https://volamosviajes.com/img/logo.png" />
+            {/* <meta name="msapplication-TileColor" content="#1f567a" /> */}
+            {/* <meta name="msapplication-TileImage" content="https://volamosviajes.com/img/logo.png" /> */}
 
             {/* Favicon and resources */}
             <link rel="icon" href="https://volamosviajes.com/favicon.ico" type="image/x-icon" />
             <link rel="apple-touch-icon" sizes="180x180" href="https://volamosviajes.com/favicon.ico" />
             <link rel="icon" type="image/png" sizes="32x32" href="https://volamosviajes.com/img/favicon-32x32.png" />
-            <link rel="manifest" href="https://volamosviajes.com/site.webmanifest" />
+            {/* <link rel="manifest" href="https://volamosviajes.com/site.webmanifest" /> */}
         </Helmet>
     )
 }
