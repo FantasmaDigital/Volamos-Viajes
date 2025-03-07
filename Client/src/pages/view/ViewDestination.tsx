@@ -49,7 +49,7 @@ const ViewDestination: React.FC = () => {
 
     return (
         <div className="w-full h-full bg-gray-100">
-            <HelmetViewDestination destination={destination}/>
+            <HelmetViewDestination/>
             <Header color="white" />
             <div
                 style={{
