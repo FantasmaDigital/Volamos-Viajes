@@ -9,13 +9,14 @@ import { HelmetProvider } from "react-helmet-async";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <HelmetProvider>    <LocationProvider>
-      <AuthProvider>
-        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-          <App />
-        </GoogleOAuthProvider>
-      </AuthProvider>
-    </LocationProvider>
+    <HelmetProvider>
+      <LocationProvider>
+        <AuthProvider>
+          <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+            <App />
+          </GoogleOAuthProvider>
+        </AuthProvider>
+      </LocationProvider>
     </HelmetProvider>
   </StrictMode>,
 )
