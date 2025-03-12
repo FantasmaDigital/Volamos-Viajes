@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { GALLERY, INFO } from "../../constants/Icons";
 import { detailItems } from "../../constants/enums/details.enum";
 import ViewInformation from "../../components/ViewInformation";
@@ -11,15 +11,23 @@ import ScrollToTop from "../../components/ScrollTopBtn";
 import Footer from "../../components/Footer";
 import WhatsAppBtn from "../../components/WhatsAppBtn";
 import HelmetViewDestination from "../../conf/HelmetViewDestination";
+import destinations from "../../constants/arrays/destination";
 
 const ViewDestination: React.FC = () => {
     const location = useLocation();
-    const { destination } = location.state || {};
+    const { destinationName } = useParams<{ destinationName: string }>();
     const [showModule, setShowModule] = useState<string>(detailItems.INFORMATION);
 
+    // Obtener la información de la ubicación desde location.state o desde el array destinations
+    const destination = location.state?.destination || destinations.find(dest => {
+        const urlName = destinationName?.toLowerCase().split(' ')[0];
+        const destName = dest.name.toLowerCase().split(' ')[0];
+        return urlName === destName;
+    });
+
     useEffect(() => {
-        scrollToTop()
-    }, [])
+        scrollToTop();
+    }, []);
 
     // Optimized function to handle module styling
     const setStyle = useMemo(() => {
@@ -46,6 +54,10 @@ const ViewDestination: React.FC = () => {
         from: { opacity: 0, transform: "translateY(30px)" },
         config: { tension: 300, friction: 35 }
     });
+
+    if (!destination) {
+        return <div>Destino no encontrado</div>;
+    }
 
     return (
         <div className="w-full h-full bg-gray-100">
