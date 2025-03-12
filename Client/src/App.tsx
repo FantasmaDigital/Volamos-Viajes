@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
         {/* Other routes */}
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/view/:id" element={<ViewDestination />} />
+        <Route path="/view/:destinationName" element={<ViewDestination />} />
 
         {/* Guide route */}
         {/* <Route path="/guide" element={<GuideHome />} /> */}
