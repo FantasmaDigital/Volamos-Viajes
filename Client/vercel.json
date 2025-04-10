@@ -15,41 +15,31 @@
       "src": "/sitemap.xml",
       "dest": "/sitemap.xml",
       "headers": {
-        "Content-Type": "application/xml"
+        "Content-Type": "application/xml",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
       }
     },
     {
       "src": "/robots.txt",
       "dest": "/robots.txt",
       "headers": {
-        "Content-Type": "text/plain"
+        "Content-Type": "text/plain",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
       }
     },
     {
       "src": "/(.*)",
       "headers": {
         "X-Robots-Tag": "index, follow",
-        "Cache-Control": "public, max-age=3600, must-revalidate"
+        "Cache-Control": "public, max-age=3600, must-revalidate",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
       }
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
-      ]
     }
   ]
 }
