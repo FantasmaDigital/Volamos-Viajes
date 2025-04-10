@@ -10,7 +10,7 @@ import NewPassword from "./components/NewPassword";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter basename={'/'}>
+    <BrowserRouter>
       <Routes>
         {/* Ruta principal */}
         <Route index element={<Home />} />
