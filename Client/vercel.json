@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
       "src": "/sitemap.xml",
       "dest": "/sitemap.xml",
       "headers": {
@@ -26,16 +30,13 @@
       }
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "src": "/_next/static/(.*)",
+      "dest": "/_next/static/$1"
     },
     {
       "src": "/(.*)",
       "dest": "/index.html",
-      "headers": {
-        "Cache-Control": "public, max-age=3600",
-        "X-Robots-Tag": "index, follow"
-      }
+      "status": 200
     }
   ]
 }
