@@ -17,7 +17,7 @@ import WhatsAppBtn from "../../components/WhatsAppBtn";
 import PromotionPackage from "../../components/PromotionPackage";
 import PromoPopUp from "../../utils/PromoPopUp";
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import HelmetHome from "../../conf/HelmetHome";
+import SEO from "../../conf/SEO";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -31,7 +31,19 @@ const Home: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center bg-white overflow-hidden">
-      <HelmetHome/>
+      {/* Componente SEO con propiedades personalizadas para la página de inicio */}
+      <SEO
+        pageTitle="✈️ Volamos Viajes | Paquetes de Viaje con Descuento desde El Salvador"
+        pageDescription="Reserva tus vacaciones con hasta 60% de descuento. Ofertas exclusivas en paquetes todo incluido a Cancún, Riviera Maya, Europa y más. Agencia de viajes en San Salvador."
+        pagePath="/"
+        pageKeywords={[
+          "viajes desde El Salvador",
+          "paquetes turísticos baratos",
+          "ofertas de vuelos San Salvador",
+          "agencias de viaje en SV",
+          "vacaciones todo incluido"
+        ]}
+      />
       <PromoPopUp />
 
       <Header color="white" />

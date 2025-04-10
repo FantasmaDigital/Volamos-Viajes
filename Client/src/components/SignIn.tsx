@@ -9,7 +9,7 @@ import GoogleBTN from "./GoogleBTN";
 import { useAuth } from "../context/AuthContext";
 import { usePost } from "../hooks/usePost";
 import { sanitizeInput } from "../utils/functions/sanitizeInput";
-import HelmetSignIn from "../conf/HelmetSignIn";
+import SEO from "../conf/SEO";
 
 const HeaderLogo = React.lazy(() => import("./HeroLogo"));
 
@@ -75,7 +75,19 @@ const SignIn: React.FC = () => {
 
   return (
     <div className="flex min-h-screen py-14 md:py-0">
-      <HelmetSignIn />
+      {/* Componente SEO con propiedades personalizadas para la página de inicio de sesión */}
+      <SEO
+        pageTitle="Iniciar Sesión | Volamos Viajes - Accede a tu cuenta"
+        pageDescription="Inicia sesión en tu cuenta de Volamos Viajes para gestionar tus reservas, ver tus viajes y acceder a ofertas exclusivas."
+        pagePath="/signin"
+        pageKeywords={[
+          "iniciar sesión Volamos Viajes",
+          "acceso cuenta viajes",
+          "login agencia viajes El Salvador",
+          "ingresar a mi cuenta",
+          "recuperar contraseña viajes"
+        ]}
+      />
       <div
         className="hidden lg:flex w-[55%] bg-cover bg-center relative"
         style={{ backgroundImage: "url('./img/background/blockss.jpg')", backgroundPosition: "center" }}
