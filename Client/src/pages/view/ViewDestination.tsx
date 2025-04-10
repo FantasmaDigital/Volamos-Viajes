@@ -10,8 +10,8 @@ import Header from "../../components/Navbar";
 import ScrollToTop from "../../components/ScrollTopBtn";
 import Footer from "../../components/Footer";
 import WhatsAppBtn from "../../components/WhatsAppBtn";
-import HelmetViewDestination from "../../conf/HelmetViewDestination";
 import destinations from "../../constants/arrays/destination";
+import SEO from "../../conf/SEO";
 
 const ViewDestination: React.FC = () => {
     const location = useLocation();
@@ -28,6 +28,25 @@ const ViewDestination: React.FC = () => {
     useEffect(() => {
         scrollToTop();
     }, []);
+
+    // SEO metadata basada en el destino
+    const seoData = useMemo(() => {
+        if (!destination) return {};
+
+        return {
+            pageTitle: `${destination.name} | Paquetes de Viaje | Volamos Viajes`,
+            pageDescription: `Descubre paquetes turísticos a ${destination.name}. ${destination.description || 'Ofertas exclusivas con vuelos, hoteles y experiencias.'}`,
+            pagePath: `/destinos/${destinationName}`,
+            pageImage: destination.images?.[0] || "https://volamosviajes.com/img/destinations/poin-panama-1.jpeg",
+            pageKeywords: [
+                `viajes a ${destination.name}`,
+                `paquetes ${destination.name}`,
+                `turismo en ${destination.name}`,
+                `ofertas ${destination.name}`,
+                "viajes desde El Salvador"
+            ]
+        };
+    }, [destination, destinationName]);
 
     // Optimized function to handle module styling
     const setStyle = useMemo(() => {
@@ -56,12 +75,30 @@ const ViewDestination: React.FC = () => {
     });
 
     if (!destination) {
-        return <div>Destino no encontrado</div>;
+        return (
+            <div className="w-full h-full bg-gray-100">
+                <SEO
+                    pageTitle="Destino no encontrado | Volamos Viajes"
+                    pageDescription="El destino que buscas no está disponible actualmente. Descubre nuestras otras opciones de viaje."
+                    pagePath="/destino-no-encontrado"
+                />
+                <div className="flex justify-center items-center h-screen">
+                    <h1 className="text-2xl font-bold">Destino no encontrado</h1>
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="w-full h-full bg-gray-100">
-            <HelmetViewDestination/>
+            {/* Componente SEO con datos dinámicos del destino */}
+            <SEO
+                pageTitle={seoData.pageTitle}
+                pageDescription={seoData.pageDescription}
+                pagePath={seoData.pagePath}
+                pageImage={seoData.pageImage}
+                pageKeywords={seoData.pageKeywords}
+            />
             <Header color="white" />
             <div
                 style={{

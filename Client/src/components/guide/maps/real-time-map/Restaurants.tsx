@@ -18,7 +18,7 @@ const Restaurants: React.FC<RestaurantsProps> = ({
     markSelectedRestaurants
 }) => {
     useEffect(() => {
-        console.log(restaurantsInStorage)
+        // console.log(restaurantsInStorage)
     }, [restaurantsInStorage])
     return (
         <div className="mt-4">

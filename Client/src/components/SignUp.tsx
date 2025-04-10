@@ -9,8 +9,8 @@ import { sanitizeInput } from "../utils/functions/sanitizeInput";
 import Separator from "../utils/Separator";
 import { Alert } from "@mui/material";
 import GoogleBTN from "./GoogleBTN";
-import HelmetSignUp from "../conf/HelmetSignUp";
 import { usePost } from "../hooks/usePost";
+import SEO from "../conf/SEO";
 
 // Componentes cargados de forma diferida
 const HeaderLogo = React.lazy(() => import("./HeroLogo"));
@@ -93,7 +93,19 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="flex min-h-screen py-10 md:py-0">
-      <HelmetSignUp />
+       {/* Componente SEO con propiedades personalizadas para la página de registro */}
+       <SEO
+        pageTitle="Regístrate | Volamos Viajes - Crea tu cuenta"
+        pageDescription="Únete a Volamos Viajes y accede a ofertas exclusivas. Crea tu cuenta en minutos y comienza a planear tus próximas vacaciones desde El Salvador."
+        pagePath="/signup"
+        pageKeywords={[
+          "registro Volamos Viajes", 
+          "crear cuenta agencia viajes",
+          "signup viajes El Salvador",
+          "registro para ofertas viajes",
+          "cuenta viajes online"
+        ]}
+      />
       <div
         className="hidden lg:flex w-[55%] bg-cover bg-center relative"
         style={{
