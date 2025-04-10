@@ -15,30 +15,26 @@
       "src": "/sitemap.xml",
       "dest": "/sitemap.xml",
       "headers": {
-        "Content-Type": "application/xml",
-        "X-Frame-Options": "SAMEORIGIN",
-        "X-Content-Type-Options": "nosniff",
-        "Referrer-Policy": "strict-origin-when-cross-origin"
+        "Content-Type": "application/xml"
       }
     },
     {
       "src": "/robots.txt",
       "dest": "/robots.txt",
       "headers": {
-        "Content-Type": "text/plain",
-        "X-Frame-Options": "SAMEORIGIN",
-        "X-Content-Type-Options": "nosniff",
-        "Referrer-Policy": "strict-origin-when-cross-origin"
+        "Content-Type": "text/plain"
       }
     },
     {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
       "src": "/(.*)",
+      "dest": "/index.html",
       "headers": {
-        "X-Robots-Tag": "index, follow",
-        "Cache-Control": "public, max-age=3600, must-revalidate",
-        "X-Frame-Options": "SAMEORIGIN",
-        "X-Content-Type-Options": "nosniff",
-        "Referrer-Policy": "strict-origin-when-cross-origin"
+        "Cache-Control": "public, max-age=3600",
+        "X-Robots-Tag": "index, follow"
       }
     }
   ]

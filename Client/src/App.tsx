@@ -7,28 +7,24 @@ import SignUp from "./components/SignUp";
 import ResetPassword from "./components/ResetPassword";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import NewPassword from "./components/NewPassword";
-// import GuideHome from "./pages/guide/GuideHome";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={'/'}>
       <Routes>
-        {/* Routes with "/" */}
+        {/* Ruta principal */}
         <Route index element={<Home />} />
 
-        {/* Protected SignIn and SignUp routes */}
+        {/* Rutas de autenticación */}
         <Route path="/signin" element={<ProtectedRoute><SignIn /></ProtectedRoute>} />
         <Route path="/signup" element={<ProtectedRoute><SignUp /></ProtectedRoute>} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/new-password/:token" element={<NewPassword />} />
 
-        {/* Other routes */}
-        <Route path="/reset-password" element={<ResetPassword />} />
+        {/* Rutas dinámicas */}
         <Route path="/view/:destinationName" element={<ViewDestination />} />
 
-        {/* Guide route */}
-        {/* <Route path="/guide" element={<GuideHome />} /> */}
-
-        {/* Route page not found */}
+        {/* Ruta para páginas no encontradas */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
