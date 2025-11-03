@@ -28,25 +28,7 @@ export const handleSearchStartPoint: React.FC<HandleSearchStartPointProps> = ({
 export const getCurrentLocation: React.FC<GetCurrentLocationProps> = ({
   setDefaultRoute,
 }) => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const currentLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        
-        setDefaultRoute(currentLocation);
-      },
-      (error) => {
-        console.error("Error al obtener la ubicación: ", error);
-        setDefaultRoute({ lat: 40.7128, lng: -74.006 });
-      }
-    );
-  } else {
-    console.error("La geolocalización no está disponible en este navegador.");
-    setDefaultRoute({ lat: 40.7128, lng: -74.006 });
-  }
+  setDefaultRoute({ lat: 40.7128, lng: -74.006 });
   return null;
 };
 

@@ -101,8 +101,6 @@ export const handleCheckboxChange = ({
     (item: { id: string }) => item.id === restaurant.place_id
   );
 
-  console.log(isSelected);
-
   if (!isSelected) {
     // Crear el objeto con el formato correcto
     const restaurantToAdd = {

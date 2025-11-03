@@ -18,6 +18,7 @@ import PromotionPackage from "../../components/PromotionPackage";
 import PromoPopUp from "../../utils/PromoPopUp";
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import SEO from "../../conf/SEO";
+import AppDownloadSection from "../../components/AppDownloadSection";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -70,6 +71,9 @@ const Home: React.FC = () => {
         <section className="w-full shadow-[0px_0px_19px_7px_rgba(204,_204,_204,_1)] z-10">
           <IntroSection />
         </section>
+
+        {/* App download CTA */}
+        <AppDownloadSection />
 
         {/* TopDestinations */}
         <section className="w-full flex flex-col gap-10">

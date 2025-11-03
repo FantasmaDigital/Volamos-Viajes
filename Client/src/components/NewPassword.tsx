@@ -56,9 +56,6 @@ const NewPassword: React.FC = () => {
             setTimeout(() => setStateMessage(false), 5000);
             return;
         }
-
-        console.log(userID)
-
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/users/reset-password`, {
                 method: "POST",
