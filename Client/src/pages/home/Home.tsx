@@ -80,6 +80,37 @@ const Home: React.FC = () => {
           <TopDestinations />
         </section>
 
+        {/* Mundial pre-CTA */}
+        <section
+          className="relative w-full px-6 py-20 text-white"
+          style={{
+            backgroundImage: 'url("/img/mundial-2026/M2026.jpg")',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/70" aria-hidden />
+          <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-3 max-w-2xl">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/80">
+                Mundial 2026
+              </span>
+              <h3 className="text-2xl font-semibold sm:text-3xl">
+                Viví el Mundial 2026 con experiencias únicas
+              </h3>
+              <p className="text-sm text-white/80">
+                Descubrí paquetes exclusivos con entradas, hospitality y todo el soporte necesario para disfrutar el fútbol al máximo.
+              </p>
+            </div>
+            <a
+              href="/mundial-2026"
+              className="relative inline-flex items-center justify-center rounded-md bg-white px-8 py-3.5 text-base font-semibold uppercase tracking-wide text-slate-900 shadow-lg shadow-black/25 transition hover:-translate-y-1 hover:bg-white/90 hover:shadow-xl"
+            >
+              Ver más
+            </a>
+          </div>
+        </section>
+
         <animated.div style={promotionpkgSpring} ref={promotionpkgRef} className='w-full'>
           <PromotionPackage />
         </animated.div>

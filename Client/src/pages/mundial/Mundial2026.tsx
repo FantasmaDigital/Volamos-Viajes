@@ -1,5 +1,4 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import Header from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ScrollToTop from "../../components/ScrollTopBtn";
@@ -17,6 +16,7 @@ import {
   FiAward,
 } from "react-icons/fi";
 import Newsletter from "../../components/Newsletter";
+import SEO from "../../conf/SEO";
 
 const TOTAL_PAGES = 51;
 const FILE_PREFIX =
@@ -115,16 +115,24 @@ const Mundial2026: React.FC = () => {
     }
   }, [isModalOpen, currentSlide, totalSlides]);
 
+  const preventOverlayClose = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+
   return (
     <div className="w-full min-h-screen flex flex-col bg-white overflow-hidden">
-      <Helmet>
-        <title>Catálogo Hospitality Mundial 2026 | Volamos Viajes</title>
-        <meta
-          name="description"
-          content="Explora el catálogo oficial de Hospitality para el Mundial 2026 con nuestra experiencia de lectura tipo revista."
-        />
-        <link rel="canonical" href="https://volamosviajes.com/mundial-2026" />
-      </Helmet>
+      <SEO
+        pageTitle="Catálogo Hospitality Mundial 2026 | Volamos Viajes"
+        pageDescription="Explora el catálogo oficial de Hospitality para el Mundial 2026 con nuestra experiencia de lectura tipo revista."
+        pagePath="/mundial-2026"
+        pageImage="/img/mundial-2026/M2026.jpg"
+        pageKeywords={[
+          "hospitality mundial 2026",
+          "paquetes mundial 2026",
+          "volamos viajes mundial",
+          "entradas fifa 2026"
+        ]}
+      />
       <Header color="white" showPromoCarousel={false} />
       <header className="relative mt-20 overflow-hidden bg-black py-40 text-white">
         <div className="absolute inset-0 bg-[url('/img/mundial-2026/M2026.jpg')] bg-cover bg-center opacity-40"></div>
@@ -175,10 +183,10 @@ const Mundial2026: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="flex flex-col gap-5 rounded-2xl border border-primary/10 bg-primary/5 p-6">
+                <div className="flex flex-col gap-5 rounded-2xl border border-primary/10 bg-primary/5 p-4 md:p-6">
                   <div className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-[0px_20px_40px_-25px_rgba(15,23,42,0.35)]">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <FiDownload className="h-6 w-6" />
+                    <div className="flex items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <FiDownload className="h-6 w-6 m-2" />
                     </div>
                     <div className="text-sm text-text">
                       <p className="font-semibold text-primary">Catálogo oficial PDF</p>
@@ -224,7 +232,7 @@ const Mundial2026: React.FC = () => {
                   keyBoardControl
                   renderDotsOutside={false}
                   arrows={!isModalOpen}
-                  afterChange={(previousSlide, state) => {
+                  afterChange={(_, state) => {
                     const next = state?.currentSlide ?? 0;
                     const clamped = Math.min(Math.max(next, 0), totalSlides - 1);
                     setCurrentSlide(clamped);
@@ -356,10 +364,19 @@ const Mundial2026: React.FC = () => {
       </main>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/90 px-4 py-10">
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/90 px-4 py-10"
+          role="dialog"
+          aria-modal="true"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setIsModalOpen(false);
+            }
+          }}
+        >
           <button
             onClick={() => setIsModalOpen(false)}
-            className="absolute top-6 right-6 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+            className="absolute top-6 right-6 z-50 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
             aria-label="Cerrar vista ampliada"
           >
             ✕
@@ -368,14 +385,20 @@ const Mundial2026: React.FC = () => {
             <button
               aria-label="Página anterior"
               className="absolute left-0 top-1/2 z-10 -translate-y-1/2 -translate-x-20 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
-              onClick={() => modalCarouselRef.current?.previous()}
+              onClick={(event) => {
+                preventOverlayClose(event);
+                modalCarouselRef.current?.previous();
+              }}
             >
               <FiChevronLeft className="h-6 w-6" />
             </button>
             <button
               aria-label="Página siguiente"
               className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-20 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
-              onClick={() => modalCarouselRef.current?.next()}
+              onClick={(event) => {
+                preventOverlayClose(event);
+                modalCarouselRef.current?.next();
+              }}
             >
               <FiChevronRight className="h-6 w-6" />
             </button>
@@ -391,7 +414,7 @@ const Mundial2026: React.FC = () => {
               itemClass="px-2"
               keyBoardControl
               renderDotsOutside={false}
-              afterChange={(previousSlide, state) => {
+              afterChange={(_, state) => {
                 const next = state?.currentSlide ?? 0;
                 const clamped = Math.min(Math.max(next, 0), totalSlides - 1);
                 setCurrentSlide(clamped);
@@ -420,8 +443,8 @@ const Mundial2026: React.FC = () => {
 
                 const containerHeight = figureHeight + 80;
                 const firstPageNumber = slidePages[0]?.pageNumber ?? 1;
-                const lastPageNumber =
-                  slidePages[slidePages.length - 1]?.pageNumber ?? firstPageNumber;
+                // const lastPageNumber =
+                //   slidePages[slidePages.length - 1]?.pageNumber ?? firstPageNumber;
 
                 return (
                   <div key={`modal-slide-${firstPageNumber}`} className="flex w-full items-center justify-center">
@@ -449,6 +472,7 @@ const Mundial2026: React.FC = () => {
                               width: figureWidth,
                               height: figureHeight,
                             }}
+                            onClick={preventOverlayClose}
                           >
                             <img
                               src={page.src}
@@ -467,41 +491,6 @@ const Mundial2026: React.FC = () => {
                 );
               })}
             </Carousel>
-            {(() => {
-              const currentSlidePages = displaySlides[currentSlide] ?? [];
-              const firstPageNumber = currentSlidePages[0]?.pageNumber ?? 1;
-              const lastPageNumber = currentSlidePages[currentSlidePages.length - 1]?.pageNumber ?? firstPageNumber;
-              const hasPrev = currentSlide > 0;
-              const hasNext = currentSlide < totalSlides - 1;
-              return (
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-white/80 w-full max-w-4xl">
-                  <button
-                    className={classNames(
-                      "inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition",
-                      hasPrev ? "hover:bg-white/10" : "opacity-40 cursor-not-allowed"
-                    )}
-                    onClick={() => hasPrev && modalCarouselRef.current?.previous()}
-                    disabled={!hasPrev}
-                  >
-                    ← {hasPrev ? `Pág. ${firstPageNumber - 1}` : "Inicio"}
-                  </button>
-                  <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold">
-                    Pág. {firstPageNumber}
-                    {firstPageNumber !== lastPageNumber ? ` - ${lastPageNumber}` : ""} de {TOTAL_PAGES}
-                  </span>
-                  <button
-                    className={classNames(
-                      "inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition",
-                      hasNext ? "hover:bg-white/10" : "opacity-40 cursor-not-allowed"
-                    )}
-                    onClick={() => hasNext && modalCarouselRef.current?.next()}
-                    disabled={!hasNext}
-                  >
-                    {hasNext ? `Pág. ${lastPageNumber + 1}` : "Fin"} →
-                  </button>
-                </div>
-              );
-            })()}
           </div>
         </div>
       )}
