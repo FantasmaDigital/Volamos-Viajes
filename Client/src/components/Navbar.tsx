@@ -111,8 +111,19 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
                   </button>
                 </li>
               ))}
+              <li>
+                <button
+                  className={classNames(
+                    "duration-300 transform hover:underline",
+                    isScrolled ? "text-white" : "text-white"
+                  )}
+                  onClick={() => navigateTo("/mundial-2026")}
+                >
+                  Mundial 2026
+                </button>
+              </li>
             </ul>
-            <div className="flex gap-3 ml-6">
+            <div className="flex gap-3 ml-10">
               {token && user ? (
                 <div className="flex items-center gap-4 pl-5">
                   <div className="flex flex-col gap-1">
@@ -180,20 +191,11 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
                   <button
                     className={classNames(
                       "py-2 px-5 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
-                      isScrolled ? "bg-white text-primary hover:bg-gray-200" : "bg-transparent text-white shadow-md"
-                    )}
-                    onClick={() => navigateTo("/signin")}
-                  >
-                    Iniciar sesión
-                  </button>
-                  <button
-                    className={classNames(
-                      "py-2 px-5 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
                       isScrolled ? "bg-secondary text-white" : "bg-white text-secondary"
                     )}
-                    onClick={() => navigateTo("/signup")}
+                    onClick={() => smoothScrollToSection("download-app")}
                   >
-                    Registrarse
+                    Descarga nuestra app
                   </button>
                 </>
               )}
@@ -224,6 +226,14 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
                 {name}
               </button>
             ))}
+            <li>
+              <button
+                className="text-white text-lg font-semibold"
+                onClick={() => navigateTo("/mundial-2026")}
+              >
+                Mundial 2026
+              </button>
+            </li>
             {token && user ? (
               <div className="flex items-center gap-4 pl-0 lg:pl-5 mt-0 lg:mt-5">
                 <Avatar
@@ -251,21 +261,15 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
               <>
                 <button
                   className={classNames(
-                    "py-2 px-5 min-w-44 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
-                    isScrolled ? "bg-white text-primary hover:bg-gray-200" : "bg-transparent text-white shadow-md"
-                  )}
-                  onClick={() => navigateTo("/signin")}
-                >
-                  Iniciar sesión
-                </button>
-                <button
-                  className={classNames(
-                    "py-2 px-5 min-w-44 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl",
+                    "py-2 px-5 min-w-44 rounded-sm font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl text-center",
                     isScrolled ? "bg-secondary text-white" : "bg-white text-secondary"
                   )}
-                  onClick={() => navigateTo("/signup")}
+                  onClick={() => {
+                    smoothScrollToSection("download-app");
+                    toggleMobileMenu();
+                  }}
                 >
-                  Registrarse
+                  Descarga nuestra app
                 </button>
               </>
             )}

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 interface RestaurantsProps {
     showAllRestaurants: React.SetStateAction<boolean>,
     restaurants: any[],
@@ -17,9 +15,6 @@ const Restaurants: React.FC<RestaurantsProps> = ({
     setShowAllRestaurants,
     markSelectedRestaurants
 }) => {
-    useEffect(() => {
-        // console.log(restaurantsInStorage)
-    }, [restaurantsInStorage])
     return (
         <div className="mt-4">
             <h4 className="font-bold text-lg">Restaurantes Cercanos:</h4>

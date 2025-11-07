@@ -31,8 +31,6 @@ const RealTimeMap: React.FC = () => {
     ...restaurantsInStorage.map((restaurant) => restaurant.location),
     endPoint, // Calle Arce
   ];
-  let userMarker:any = null;
-
   const centerOnStartPoint = (map:any, startPoint:any) => {
     if (map && startPoint) {
       map.setCenter(new google.maps.LatLng(startPoint.lat, startPoint.lng));
@@ -58,33 +56,6 @@ const RealTimeMap: React.FC = () => {
         },
       });
       setDirectionsRenderer(renderer);
-  
-      // Geolocalización
-      if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            const newLocation = { lat: latitude, lng: longitude };
-  
-            setStartPoint(newLocation);
-  
-            newMap.setCenter(newLocation);
-  
-            if (userMarker) {
-              userMarker.setMap(null); // Elimina el marcador anterior
-            }
-  
-            userMarker = new google.maps.Marker({
-              position: newLocation,
-              map: newMap,
-              title: "Tu ubicación actual",
-              animation: google.maps.Animation.DROP, // Animación de caída
-            });
-          },
-          (error) => console.error("Error en la geolocalización: ", error),
-          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-        );
-      }
     }
   }, [mapRef, map, defaultRoute]);
   
@@ -202,8 +173,6 @@ const RealTimeMap: React.FC = () => {
           }
         }
       );
-    } else {
-      console.log("Todos los puntos han sido visitados.");
     }
   };
 

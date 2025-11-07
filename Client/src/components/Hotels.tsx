@@ -23,7 +23,6 @@ const Hotels: React.FC = () => {
         // Realizar la solicitud a nuestro backend
         const response = await fetch("http://localhost:4444/hotels?destination=LON&limit=10");
         const data = await response.json();
-        console.log(data);
         
         if (response.ok) {
           // Mapear los hoteles desde la respuesta de la API

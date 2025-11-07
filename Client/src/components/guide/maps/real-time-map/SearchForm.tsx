@@ -58,7 +58,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
                             const leg = result.routes[0].legs[0];
                             const transitDetails = leg.steps.find(step => step.transit);
                             transitDetails && transitDetails.duration ? transitDetails.duration.text : "0";
-                            // console.log(`Tiempo estimado de viaje en transporte público: ${travelTime}`);
                         }
                     } else {
                         console.error("No se pudo calcular la ruta en transporte público.");
