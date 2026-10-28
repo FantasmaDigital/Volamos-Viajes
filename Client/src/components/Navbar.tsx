@@ -117,9 +117,9 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
                     "duration-300 transform hover:underline",
                     isScrolled ? "text-white" : "text-white"
                   )}
-                  onClick={() => navigateTo("/mundial-2026")}
+                  onClick={() => navigateTo("/visas")}
                 >
-                  Mundial 2026
+                  Visas
                 </button>
               </li>
             </ul>
@@ -229,9 +229,9 @@ const Header: React.FC<PropsHeader> = ({ color, showPromoCarousel = true }) => {
             <li>
               <button
                 className="text-white text-lg font-semibold"
-                onClick={() => navigateTo("/mundial-2026")}
+                onClick={() => navigateTo("/visas")}
               >
-                Mundial 2026
+                Visas
               </button>
             </li>
             {token && user ? (
