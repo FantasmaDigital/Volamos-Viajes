@@ -24,12 +24,12 @@ const PromoPopUp: React.FC = () => {
   };
 
   useEffect(() => {
-    // Only show the pop-up if we are on the home route or the Mundial 2026 page
+    // Only show the pop-up on the home route or the Visas page
     const currentPath = window.location.pathname;
     const lastShownTimestamp = localStorage.getItem("lastPromoPopupShown");
     const teenMinutesInMilliseconds = 10 * 60 * 1000;
     const currentTime = new Date().getTime();
-    const eligiblePaths = ["/", "/mundial-2026"];
+    const eligiblePaths = ["/", "/visas"];
 
     if (eligiblePaths.includes(currentPath) && (!lastShownTimestamp || currentTime - Number(lastShownTimestamp) > teenMinutesInMilliseconds)) {
       // Show the SweetAlert2 pop-up
@@ -37,19 +37,19 @@ const PromoPopUp: React.FC = () => {
         html: `
           <div class="relative text-center w-full">
               <div class="relative w-full h-[520px] md:h-[520px] overflow-hidden rounded-3xl">
-                  <img src="/img/mundial-2026/M2026.jpg" alt="Mundial 2026" class="absolute top-0 left-0 w-full h-full object-cover"/>
+                  <img src="/img/destinations/estambul-1.jpg" alt="Trámite de visas con Volamos Viajes" class="absolute top-0 left-0 w-full h-full object-cover"/>
                   <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
                   <div class="absolute inset-0 flex flex-col items-center justify-end gap-4 pb-10 text-white px-6">
                       <span class="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em]">
-                          Mundial 2026
+                          Servicio de visas
                       </span>
-                      <h3 class="text-2xl md:text-3xl font-bold">Catálogo VIP FIFA World Cup 2026™</h3>
+                      <h3 class="text-2xl md:text-3xl font-bold">Tramita tu visa con Volamos Viajes</h3>
                       <p class="max-w-md text-sm md:text-base text-white/80">
-                          Descubre suites, palcos oficiales y experiencias únicas en la Copa del Mundo 2026.
+                          Estados Unidos, Canadá, México, China, Australia y Reino Unido. Te asesoramos, llenamos tu formulario y agendamos tu cita.
                       </p>
                       <div class="flex flex-col gap-3 w-full max-w-xs mx-auto">
-                        <button id="cta-mundial-popup" class="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-widest text-primary shadow-lg transition">
-                          Ver catálogo
+                        <button id="cta-visas-popup" class="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-widest text-primary shadow-lg transition">
+                          Ver visas
                         </button>
                       </div>
                   </div>
@@ -67,12 +67,12 @@ const PromoPopUp: React.FC = () => {
           actions: 'custom-actions-position hidden',
         },
         didOpen: () => {
-          const ctaButton = document.getElementById("cta-mundial-popup");
-          const closeButton = document.getElementById("cta-close-mundial");
+          const ctaButton = document.getElementById("cta-visas-popup");
+          const closeButton = document.getElementById("cta-close-visas");
           if (ctaButton) {
             ctaButton.addEventListener("click", () => {
               Swal.close();
-              smoothScrollToSection("catalogo", "/mundial-2026");
+              smoothScrollToSection("tipos-de-visa", "/visas");
             });
           }
           if (closeButton) {
