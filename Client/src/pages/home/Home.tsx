@@ -14,7 +14,6 @@ import Newsletter from "../../components/Newsletter";
 import { useScrollAnimation } from "../../utils/functions/useScrollAnimation";
 import { scrollToTop } from "../../utils/functions/topScroll";
 import WhatsAppBtn from "../../components/WhatsAppBtn";
-import PromotionPackage from "../../components/PromotionPackage";
 import PromoPopUp from "../../utils/PromoPopUp";
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import SEO from "../../conf/SEO";
@@ -26,7 +25,6 @@ const Home: React.FC = () => {
   }, [])
   const { ref: brandsRef, springProps: brandsSpring } = useScrollAnimation(100);
   const { ref: categoriesRef, springProps: categoriesSpring } = useScrollAnimation(100);
-  const { ref: promotionpkgRef, springProps: promotionpkgSpring } = useScrollAnimation(100);
   const { ref: testimonialsRef, springProps: testimonialsSpring } = useScrollAnimation(100);
   const { ref: footerRef, springProps: footerSpring } = useScrollAnimation(100);
 
@@ -111,9 +109,6 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        <animated.div style={promotionpkgSpring} ref={promotionpkgRef} className='w-full'>
-          <PromotionPackage />
-        </animated.div>
 
         {/* Testimonials con zoom-in y Newsletter */}
         <section
